@@ -30,6 +30,7 @@ var reittiopasHandler = function () {
 		//		- return location object
 		var addr = "http://api.reittiopas.fi/hsl/prod/?request=geocode&user="+username+"&pass="+password+"&format="+format+"&epsg_out="+coordSystem+"&key="+name;
 		// Show a loading message?
+		// Check for connection? what to do if there's no connection? (offline mode)
 		$.get(addr, function(data) {
 			// Hide the loading message?
 			// handle the results in data
@@ -43,13 +44,17 @@ var reittiopasHandler = function () {
 
 var localStorageFactory = function () {
 	
+	// Insert a location in the local storage
 	function putLoc(loc) {
 		localStorage[loc.name] = JSON.serialize(loc);	  
 	}
 	
+	// Get a location from the local storage
 	function getLoc(name) {
-		if(localStorage[name] == null) 
-			localStorage[name] = reittiopasHandler.getLocation(name);
+		if(localStorage[name] == null) {
+			// if we can't find the location we fetch it online
+			putLoc(reittiopasHandler.getLocation(name));
+		}
 		return jQuery.parseJSON(localStorage[name]);
 	}
 	
