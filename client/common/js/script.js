@@ -1,3 +1,4 @@
+// we can use this to create new locations
 var locationFactory = function() {
 	function newLocation(name, address, latitude, longitude) {
 		var location = {
@@ -15,6 +16,7 @@ var locationFactory = function() {
 }
 
 var reittiopasHandler = function () {
+	// Reittiopas URL parameters
 	var baseUrl = "http://api.reittiopas.fi/hsl/prod/?";
 	var username = "user=zouba";
 	var password = "pass=caf9r3ee";
@@ -28,12 +30,17 @@ var reittiopasHandler = function () {
 		//		- more results are returned in any case, check for unique names
 		//		- if more results have same name, let the user choose which one he means
 		//		- return location object
-		var addr = "http://api.reittiopas.fi/hsl/prod/?request=geocode&user="+username+"&pass="+password+"&format="+format+"&epsg_out="+coordSystem+"&key="+name;
+		var addr = "http://api.reittiopas.fi/hsl/prod/?request=geocode&"+username+"&"+password+"&"+format+"&"+coordSystemOut+"&key="+name;
 		// Show a loading message?
 		// Check for connection? what to do if there's no connection? (offline mode)
 		$.get(addr, function(data) {
 			// Hide the loading message?
-			// handle the results in data
+			/*var possibilities = [];
+			for(i=0; i<data.length; ++i) {
+				if(data[i].name == name) {
+					
+				}
+			}*/
 		});
 	}
 	
@@ -53,7 +60,15 @@ var localStorageFactory = function () {
 	function getLoc(name) {
 		if(localStorage[name] == null) {
 			// if we can't find the location we fetch it online
-			putLoc(reittiopasHandler.getLocation(name));
+			// Just occurred to me that this may not work.. :P i'll open a new issue
+			/*
+			var loc = reittiopasHandler.getLocation(name);
+			if(loc)
+				putLoc(loc);
+			else
+				return null;
+			*/ 
+			return null;
 		}
 		return jQuery.parseJSON(localStorage[name]);
 	}
