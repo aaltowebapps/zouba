@@ -13,7 +13,7 @@
     <script src='backbone.js' type='text/javascript'></script>
     <script src='backbone.localStorage.js' type='text/javascript'></script>
     <title>
-      Blog
+      TimeTracker
     </title>
     <style type='text/css'>
       /*<![CDATA[*/
@@ -34,16 +34,25 @@
     <script type='text/javascript'>
       //<![CDATA[
         var Templates = {};
-        var articles;
+        var tasklist;
+        var trackinglist;
         
-        var Article = Backbone.Model.extend ({
+        var Task = Backbone.Model.extend ({
         });
         
-        var Articles = Backbone.Collection.extend ({
-          model: Article,
-          localStorage: new Backbone.LocalStorage("Articles")
+        var TaskList = Backbone.Collection.extend ({
+          model: Task,
+          localStorage: new Backbone.LocalStorage("TaskList")
         });
               
+        var Tracking = Backbone.Model.extend ({
+        });
+        
+        var TrackingList = Backbone.Collection.extend ({
+          model: Tracking,
+          localStorage: new Backbone.LocalStorage("TrackingList")
+        });
+        
         $(function() {
           //Load the templates and store them in a global variable
           $('script[type="text/x-handlebars-template"]').each(function () {
@@ -54,7 +63,7 @@
           var ItemView = Backbone.View.extend ({
             tagName: "li",
             events: {
-              "blur [contenteditable]": "saveValues"
+              "click #toggleRun": "toggleRunning"
             },
             initialize: function() { 
               this.model.bind('change', this.render, this);
@@ -69,7 +78,24 @@
                 title: this.$("[data-name='title']").html(), 
                 content: this.$("[data-name='content']").html()
               },{silent: true});
-            }        
+            },
+            toggleRunning: function() {
+                alert(this.model.get("running"));
+                if((this.model.get("running")) == "true") {
+                    var tracking = trackinglist.getByCid(this.model.id);
+                    var timediff = new Date().getTime() - tracking.get("start");
+                    this.model.set("trackings", this.model.get("trackings")+1);
+                    this.model.set("totaltime", this.model.get("totaltime") + timediff/1000);
+                    trackinglist.remove(tracking);
+                    this.model.set("running" ,"false");
+                } else {
+                    var tracking = new Tracking();
+                    tracking.set({start: new Date().getTime()});
+                    tracking.cid = this.model.id;
+                    trackinglist.add(tracking);
+                    this.model.set("running" ,"true");
+                }
+            }
           });
           
           //View for rendering the list of entries
@@ -100,9 +126,8 @@
               "click #postEntry": "createNew"
             },
             initialize: function() {
-              this.title = this.$("#title");
-              this.content = this.$("#content");
-              
+              this.type = this.$("#title");
+              this.description = this.$("#content");
             },
             createNew: function() {
               this.$(".invalid").removeClass("invalid");
@@ -111,13 +136,14 @@
                 return false;
               }
               this.collection.create({
-                title: this.title.val(), 
-                content: this.content.val(),
-                email: localStorage.email,
-                name: localStorage.name
+                type: this.type.val(), 
+                description: this.description.val(),
+                trackings: 0,
+                totaltime: 0,
+                running: "false"
               }, {at: 0});
-              this.title.val("");
-              this.content.val("");
+              this.type.val("");
+              this.description.val("");
             } 
           });
         
@@ -146,21 +172,23 @@
             }
           });
           
-          //Trigger an update of the articles collection 
+          //Trigger an update of the tasklist collection 
           $("#refresh").live('click',function () {
-            articles.fetch();
+            tasklist.fetch();
           });    
           
-          //Instantiate the collection of articles
-          articles = new Articles();
+          //Instantiate the collection of tasks
+          tasklist = new TaskList();
+          trackinglist = new TrackingList();
         
           //Instantiate the views
-          var listView = new ListView({collection: articles});
-          var newView = new NewView({collection: articles});
+          var listView = new ListView({collection: tasklist});
+          var newView = new NewView({collection: tasklist});
           var optionsView = new OptionsView();
           
-          //Fetch the latest articles and trigger an update of the views
-          articles.fetch();
+          //Fetch the latest tasks and trigger an update of the views
+          tasklist.fetch();
+          trackinglist.fetch();
         })
       //]]>
     </script>
@@ -168,19 +196,26 @@
   <body>
     <script id='article' type='text/x-handlebars-template'>
       <p class='ui-li-aside'>
-        {{timestamp}}
+        {{at}}
       </p>
-      <h3 contenteditable='true' data-id='{{id}}' data-name='title'>
-        {{title}}
+      <h3 data-id='{{id}}' data-name='title'>
+        {{type}}
       </h3>
       <p>
         <strong>
-          {{email}}
+          Total trackings: {{trackings}}
+        </strong>
+        <strong>
+          Total time: {{totaltime}}
+        </strong>
+        <strong>
+          Running: {{running}}
         </strong>
       </p>
-      <p contenteditable='true' data-id='{{id}}' data-name='content'>
-        {{content}}
+      <p data-id='{{id}}' data-name='content'>
+        {{description}}
       </p>
+      <a data-role='button' href='#' id='toggleRun'>Toggle Active</a>
     </script>
     <div data-role='page' id='home'>
       <div data-role='header'>
