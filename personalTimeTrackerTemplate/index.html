@@ -65,17 +65,17 @@
             events: {
               "click #toggleRun": "toggleRunning"
             },
-            initialize: function() { 
+            initialize: function() {
               this.model.bind('change', this.render, this);
-              this.template = Templates.article;  
+              this.template = Templates.article;
             },
-            render: function() { 
-              $(this.el).html( this.template(this.model.toJSON()) ); 
-              return this; 
+            render: function() {
+              $(this.el).html( this.template(this.model.toJSON()) );
+              return this;
             },
             saveValues: function() {
               this.model.save({
-                title: this.$("[data-name='title']").html(), 
+                title: this.$("[data-name='title']").html(),
                 content: this.$("[data-name='content']").html()
               },{silent: true});
             },
@@ -123,7 +123,7 @@
           var NewView = Backbone.View.extend({
             el: $("#new"),
             events: {
-              "click #postEntry": "createNew"
+              "click #taskEntry": "createNew"
             },
             initialize: function() {
               this.type = this.$("#title");
@@ -136,7 +136,11 @@
                 return false;
               }
               this.collection.create({
+<<<<<<< HEAD
                 type: this.type.val(), 
+=======
+                type: this.type.val(),
+>>>>>>> Added layout
                 description: this.description.val(),
                 trackings: 0,
                 totaltime: 0,
@@ -144,7 +148,11 @@
               }, {at: 0});
               this.type.val("");
               this.description.val("");
+<<<<<<< HEAD
             } 
+=======
+            }
+>>>>>>> Added layout
           });
         
           //View for editing the options
@@ -172,10 +180,17 @@
             }
           });
           
+<<<<<<< HEAD
           //Trigger an update of the tasklist collection 
           $("#refresh").live('click',function () {
             tasklist.fetch();
           });    
+=======
+          //Trigger an update of the tasklist collection
+          $("#refresh").live('click',function () {
+            tasklist.fetch();
+          });
+>>>>>>> Added layout
           
           //Instantiate the collection of tasks
           tasklist = new TaskList();
@@ -209,6 +224,7 @@
           Total time: {{totaltime}}
         </strong>
         <strong>
+<<<<<<< HEAD
           Running: {{running}}
         </strong>
       </p>
@@ -216,10 +232,22 @@
         {{description}}
       </p>
       <a data-role='button' href='#' id='toggleRun'>Toggle Active</a>
+=======
+          Average time: {{averagetime}}
+        </strong>
+        <strong>
+          Running: {{running}}
+        </strong>
+      </p>
+      <p data-id='{{id}}' data-name='content' data-add-back-btn="true">
+        {{description}}
+      </p>
+      <a data-role='button' data-mini="true"  href='#' id='toggleRun'>Toggle Active </a>
+>>>>>>> Added layout
     </script>
     <div data-role='page' id='home'>
       <div data-role='header'>
-        <h1>Our First Blog</h1>
+        <h1>Personal Time Tracker</h1>
         <a class='ui-btn-right' data-icon='gear' data-transition='slidedown' href='#options'>Options</a>
       </div>
       <div data-role='content'>
@@ -229,41 +257,41 @@
         <div data-role='navbar'>
           <ul>
             <li>
-              <a data-icon='home' href='/'>Posts</a>
+              <a data-icon='home' href='#tasklist'>Tasks</a>
             </li>
             <li>
               <a data-icon='refresh' href='#home' id='refresh'>Refresh</a>
             </li>
             <li>
-              <a data-icon='plus' data-transition='flip' href='#new'>New Entry</a>
+              <a data-icon='plus' data-transition='flip' href='#new'>Add New Task</a>
             </li>
           </ul>
         </div>
       </div>
     </div>
-    <div data-role='page' id='new'>
+    <div data-role='page' id='new' data-add-back-btn="true">
       <div data-role='header'>
-        <h1>Our First Blog</h1>
+        <h1>Personal Time Tracker</h1>
         <a class='ui-btn-right' data-icon='gear' data-transition='slidedown' href='#options'>Options</a>
       </div>
-      <div data-role='content'>
+      <div data-role='content'  data-add-back-btn="true">
         <form>
-          <input id='title' name='title' placeholder='Post Title' required='required' type='text' />
-          <textarea id='content' name='content' placeholder='Content' rows='5'></textarea>
-          <a data-role='button' href='#home' id='postEntry'>Post</a>
+          <input id='title' name='title' placeholder='Task name' required='required' type='text' />
+          <textarea id='content' name='content' placeholder='Task description' rows='5'></textarea>
+          <a data-role='button' href='#home' id='taskEntry'>Add New Task</a>
         </form>
       </div>
       <div data-position='fixed' data-role='footer'>
         <div data-role='navbar'>
           <ul>
             <li>
-              <a data-icon='home' href='/'>Posts</a>
+              <a data-icon='home' href='#tasklist'>Tasks</a>
             </li>
             <li>
               <a data-icon='refresh' href='#home' id='refresh'>Refresh</a>
             </li>
             <li>
-              <a data-icon='plus' data-transition='flip' href='#new'>New Entry</a>
+              <a data-icon='plus' data-transition='flip' href='#new'>Add New Task</a>
             </li>
           </ul>
         </div>
@@ -285,13 +313,13 @@
         <div data-role='navbar'>
           <ul>
             <li>
-              <a data-icon='home' href='/'>Posts</a>
+              <a data-icon='home' href='#tasklist'>Tasks</a>
             </li>
             <li>
               <a data-icon='refresh' href='#home' id='refresh'>Refresh</a>
             </li>
             <li>
-              <a data-icon='plus' data-transition='flip' href='#new'>New Entry</a>
+              <a data-icon='plus' data-transition='flip' href='#new'>Add New Task</a>
             </li>
           </ul>
         </div>
