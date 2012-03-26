@@ -136,11 +136,7 @@
                 return false;
               }
               this.collection.create({
-<<<<<<< HEAD
-                type: this.type.val(), 
-=======
                 type: this.type.val(),
->>>>>>> Added layout
                 description: this.description.val(),
                 trackings: 0,
                 totaltime: 0,
@@ -148,11 +144,7 @@
               }, {at: 0});
               this.type.val("");
               this.description.val("");
-<<<<<<< HEAD
-            } 
-=======
             }
->>>>>>> Added layout
           });
         
           //View for editing the options
@@ -180,17 +172,10 @@
             }
           });
           
-<<<<<<< HEAD
-          //Trigger an update of the tasklist collection 
-          $("#refresh").live('click',function () {
-            tasklist.fetch();
-          });    
-=======
           //Trigger an update of the tasklist collection
           $("#refresh").live('click',function () {
             tasklist.fetch();
           });
->>>>>>> Added layout
           
           //Instantiate the collection of tasks
           tasklist = new TaskList();
@@ -224,15 +209,6 @@
           Total time: {{totaltime}}
         </strong>
         <strong>
-<<<<<<< HEAD
-          Running: {{running}}
-        </strong>
-      </p>
-      <p data-id='{{id}}' data-name='content'>
-        {{description}}
-      </p>
-      <a data-role='button' href='#' id='toggleRun'>Toggle Active</a>
-=======
           Average time: {{averagetime}}
         </strong>
         <strong>
@@ -243,7 +219,6 @@
         {{description}}
       </p>
       <a data-role='button' data-mini="true"  href='#' id='toggleRun'>Toggle Active </a>
->>>>>>> Added layout
     </script>
     <div data-role='page' id='home'>
       <div data-role='header'>
