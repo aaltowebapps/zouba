@@ -11,6 +11,13 @@
     <title>Lab4 Template</title>
     <script type="text/javascript">
       //<![CDATA[
+      
+        var point = {};
+        point.xaccel = 0;
+        point.yaccel = 0;
+        point.xpos = 0;
+        point.ypos = 0;
+        
         $(function() {
           var canvas = $('#canvas')[0];
           var ctx = canvas.getContext('2d');
@@ -36,7 +43,46 @@
            $("#save_server").bind("click", function(e) {
             e.preventDefault();
           });
+          
+          var timer1 = setInterval(function() {
+              clear_canvas(ctx);
+              draw_point(ctx, point);
+          }, 1000/30);
         })
+        
+        function clear_canvas(ctx) {
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        }
+        
+        function draw_point(ctx, pt) {
+            ctx.beginPath();
+            ctx.arc(pt.xpos, pt.ypos, 10, 0, 2 * Math.PI, false);
+            
+            pt.xpos = pt.xpos + pt.xaccel;
+            if(pt.xpos < 0) pt.xpos = 0;
+            if(pt.xpos > ctx.canvas.width) pt.xpos = ctx.canvas.width;
+            pt.ypos = pt.ypos + pt.yaccel;
+            if(pt.ypos < 0) pt.ypos = 0;
+            if(pt.ypos > ctx.canvas.height) pt.ypos = ctx.canvas.height;
+            
+            ctx.closePath();
+            ctx.fillStyle = "rgb(255, 255, 0)";
+            ctx.fill();
+        }
+        
+        window.addEventListener("deviceorientation", function( event ) {  
+          //alpha: rotation around z-axis
+          // Not needed?  
+          //$(".alpha").html(event.alpha);
+        
+          //gamma: left to right
+          //$(".beta").html(event.beta);
+          point.xaccel = event.beta;
+        
+          //beta: front back motion  
+          //$(".gamma").html(event.gamma);
+          point.yaccel = event.gamma;
+        }, false);
       //]]>
     </script>
     
