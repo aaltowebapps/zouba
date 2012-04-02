@@ -1,10 +1,10 @@
 var LocationView = Backbone.View.extend({
     tagName: "li",
 
-    template: _.templaye($('#item-template')).html(),
+    template: _.template($('#item-template')).html(),
 
     initialize: function() {
-        this.model.bind('change', this.render, this);
+        this.model.bind('change:coords', this.render, this);
     },
 
     render: function() {

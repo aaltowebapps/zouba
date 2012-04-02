@@ -34,10 +34,10 @@ var Location = Backbone.Model.extend({
         // works with chrome --disable-web-security, but how to make work regularly
         // replaced url with local json file to avoid unnecessary requests to server during development
         $.getJSON("../js/response.json", function(json) {
-            var $results = $("#results");
-            $results.text(json[0].coords);
+            this.set("coords", json[0].coords);
         });
-        /*
+
+        /* other attempts to work around the 
            $.get(url, function(json) {
             console.log("json:"+json);
         });
