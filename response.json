@@ -1,0 +1,413 @@
+Array
+(
+    [0] => Array
+        (
+            [locType] => poi
+            [locTypeId] => 1
+            [name] => Hanasaari
+            [matchedName] => Hanasaari
+            [lang] => fi
+            [city] => Espoo
+            [coords] => 2546637,6672791
+            [details] => Array
+                (
+                    [poiType] => city area
+                )
+
+        )
+
+    [1] => Array
+        (
+            [locType] => poi
+            [locTypeId] => 1
+            [name] => Hanasaari
+            [matchedName] => Hanasaari
+            [lang] => fi
+            [city] => Helsinki
+            [coords] => 2553944,6674945
+            [details] => Array
+                (
+                    [poiType] => city area
+                )
+
+        )
+
+    [2] => Array
+        (
+            [locType] => poi
+            [locTypeId] => 8
+            [name] => Hanasaari liityntäpysäköinti
+            [matchedName] => Hanasaari liityntäpysäköinti
+            [lang] => fi
+            [city] => Espoo
+            [coords] => 2547007,6672923
+            [details] => Array
+                (
+                    [poiType] => park and ride
+                )
+
+        )
+
+    [3] => Array
+        (
+            [locType] => poi
+            [locTypeId] => 7
+            [name] => Hotelli Hanasaari
+            [matchedName] => Hanasaari (hotla)
+            [lang] => slangi
+            [city] => Espoo
+            [coords] => 2546632,6672771
+            [details] => Array
+                (
+                    [poiType] => hotel
+                )
+
+        )
+
+    [4] => Array
+        (
+            [locType] => stop
+            [locTypeId] => 10
+            [name] => Hanasaari
+            [matchedName] => Hanasaari
+            [lang] => fi
+            [city] => Espoo
+            [coords] => 2546887,6673070
+            [details] => Array
+                (
+                    [address] => Länsiväylä
+                    [code] => 2222205
+                    [shortCode] => E2205
+                    [changeCost] => 0.6
+                    [lines] => Array
+                        (
+                            [0] => 2100N 1:Kamppi
+                            [1] => 2102  1:Otaniemi
+                            [2] => 2102T 1:Otaniemi
+                            [3] => 2103  1:Pohjois-Tapiola
+                            [4] => 2103T 1:Pohjois-Tapiola
+                            [5] => 2105  1:Mankkaa
+                            [6] => 2106  1:Leppävaara, lait. 21
+                            [7] => 2106K 1:Leppävaara, lait. 21
+                            [8] => 2106T 1:Leppävaara, lait. 21
+                            [9] => 2107  1:Suurpelto
+                            [10] => 2109  1:Jorvi
+                            [11] => 2109T 1:Jorvi
+                            [12] => 2110  1:Leppävaara, l.11
+                            [13] => 2110A 1:Mäkkylä
+                            [14] => 2110T 1:Leppävaara, l.11
+                            [15] => 2110TA1:Mäkkylä
+                            [16] => 2111  1:Haukilahti
+                            [17] => 2111T 1:Haukilahti
+                            [18] => 2112  1:Matinkylä
+                            [19] => 2121  1:Kuitinmäki
+                            [20] => 2121A 1:Puolarmetsä
+                            [21] => 2121AT1:Puolarmetsä
+                            [22] => 2121K 1:Henttaa
+                            [23] => 2121N 1:Mankkaa
+                            [24] => 2121NK1:Mankkaa
+                            [25] => 2121NT1:Mankkaa
+                            [26] => 2121T 1:Kuitinmäki
+                            [27] => 2122  1:Friisilänaukio
+                            [28] => 2122A 1:Holmanmäki
+                            [29] => 2130N 1:Kamppi
+                            [30] => 2132  1:Friisilänaukio
+                            [31] => 2140N 1:Kamppi
+                            [32] => 2143  1:Soukka
+                            [33] => 2143A 1:Soukanniemi
+                            [34] => 2143K 1:Soukka
+                            [35] => 2143T 1:Soukka
+                            [36] => 2145  1:Suvisaaristo
+                            [37] => 2145K 1:Suvisaaristo
+                            [38] => 2145KN1:Suvisaaristo
+                            [39] => 2145N 1:Suvisaaristo
+                            [40] => 2147  1:Kivenlahti
+                            [41] => 2147K 1:Kivenlahti
+                            [42] => 2147KT1:Kivenlahti
+                            [43] => 2147T 1:Kivenlahti
+                            [44] => 2150  1:Kivenlahti
+                            [45] => 2150A 1:Tillinmäki
+                            [46] => 2154  1:Tuomarila
+                            [47] => 2154T 1:Tuomarila
+                            [48] => 2156  1:Sunanniitty
+                            [49] => 2158  1:Nöykkiönlaakso
+                            [50] => 2160  1:Latokaski
+                            [51] => 2160K 1:Latokaski
+                            [52] => 2160KT1:Latokaski
+                            [53] => 2160T 1:Latokaski
+                            [54] => 2165  1:Kauklahti
+                            [55] => 2165N 1:Espoonkartano
+                            [56] => 2165V 1:Kauklahti
+                            [57] => 2501  1:Oravannahkatori
+                            [58] => 2501V 1:Otaniemi
+                            [59] => 7167T 1:Siuntio
+                            [60] => 7175L 1:Kantvik
+                            [61] => 7175M 1:Kantvik
+                            [62] => 7175MK1:Kantvik
+                            [63] => 7175MN1:Kantvik
+                            [64] => 7175MV1:Kantvik
+                            [65] => 7175X 1:Kantvik
+                            [66] => 7175XK1:Kantvik
+                            [67] => 7176MK1:Pikkalan tehdas th
+                            [68] => 7176MV1:Pikkalan tehdas
+                            [69] => 7177L 1:Upinniemi
+                            [70] => 7177LT1:Upinniemi
+                            [71] => 7177M 1:Upinniemi
+                            [72] => 7177MK1:Upinniemi
+                            [73] => 7177MT1:Upinniemi
+                            [74] => 7177X 1:Upinniemi
+                            [75] => 7177XE1:Upinniemi
+                            [76] => 7177XV1:Upinniemi
+                            [77] => 7178KM1:Upinniemi
+                            [78] => 7178L 1:Upinniemi
+                            [79] => 7178M 1:Upinniemi
+                            [80] => 7178MK1:Upinniemi
+                            [81] => 7178MN1:Upinniemi
+                            [82] => 7180L 1:Kirkkonummi
+                            [83] => 7180LE1:Kirkkonummi
+                            [84] => 7180M 1:Kirkkonummi
+                            [85] => 7180MK1:Kirkkonummi
+                            [86] => 7180SK1:Kirkkonummi
+                            [87] => 7180X 1:Kirkkonummi
+                            [88] => 7180XK1:Kirkkonummi
+                            [89] => 7181L 1:Gesterby
+                            [90] => 7181M 1:Gesterby
+                            [91] => 7181MV1:Gesterby
+                            [92] => 7181SE1:Gesterby
+                            [93] => 7182M 1:Ravals
+                            [94] => 7182MK1:Ravals
+                            [95] => 7182MV1:Pikkala
+                            [96] => 7182X 1:Ravals
+                            [97] => 7182XA1:Överby
+                            [98] => 7182XK1:Ravals
+                            [99] => 7185E 1:Hirsala
+                            [100] => 7186LE1:Pikkala (Siuntio)
+                            [101] => 7186M 1:Pikkalan tehdas
+                            [102] => 7186XK1:Pikkalan tehdas
+                            [103] => 7189L 1:Pikkalan tehdas th
+                            [104] => 7189LV1:Pikkala (Inkoo)
+                            [105] => 7189M 1:Pikkalan tehdas th
+                            [106] => 7189MK1:Pikkalan tehdas th
+                            [107] => 7189MN1:Pikkalan tehdas th
+                            [108] => 7189S 1:Pikkalan tehdas th
+                            [109] => 7189X 1:Pikkalan tehdas th
+                            [110] => 7190  1:Inkoo
+                        )
+
+                    [transport_type_id] => 1
+                )
+
+        )
+
+    [5] => Array
+        (
+            [locType] => stop
+            [locTypeId] => 10
+            [name] => Hanasaari
+            [matchedName] => Hanasaari
+            [lang] => fi
+            [city] => Espoo
+            [coords] => 2546939,6672964
+            [details] => Array
+                (
+                    [address] => Länsiväylä
+                    [code] => 2232204
+                    [shortCode] => E2332
+                    [changeCost] => 0.6
+                    [lines] => Array
+                        (
+                            [0] => 2100N 1:Kamppi
+                            [1] => 2102  2:Kamppi, laituri 41
+                            [2] => 2102T 2:Kamppi, laituri 41
+                            [3] => 2103  2:Kamppi, laituri 42
+                            [4] => 2103T 2:Kamppi, laituri 42
+                            [5] => 2105  2:Kamppi, laituri 43
+                            [6] => 2106  2:Kamppi, laituri 44
+                            [7] => 2106K 2:Kamppi, laituri 44
+                            [8] => 2106T 2:Kamppi, laituri 44
+                            [9] => 2107  2:Kamppi, laituri 47
+                            [10] => 2109  2:Kamppi, laituri 45
+                            [11] => 2109T 2:Kamppi, laituri 45
+                            [12] => 2110  2:Kamppi, laituri 44
+                            [13] => 2110A 2:Kamppi, laituri 44
+                            [14] => 2110T 2:Kamppi, laituri 44
+                            [15] => 2110TA2:Kamppi, laituri 44
+                            [16] => 2111  2:Kamppi, laituri 46
+                            [17] => 2111T 2:Kamppi, laituri 46
+                            [18] => 2112  2:Kamppi, laituri 46
+                            [19] => 2121  2:Kamppi, laituri 47
+                            [20] => 2121A 2:Kamppi, laituri 47
+                            [21] => 2121AT2:Kamppi, laituri 47
+                            [22] => 2121K 2:Kamppi, laituri 47
+                            [23] => 2121N 2:Kamppi, laituri 47
+                            [24] => 2121T 2:Kamppi, laituri 47
+                            [25] => 2122  2:Kamppi, laituri 48
+                            [26] => 2122A 2:Kamppi, laituri 48
+                            [27] => 2130N 1:Kamppi
+                            [28] => 2132  2:Kamppi, laituri 49
+                            [29] => 2140N 1:Kamppi
+                            [30] => 2143  2:Kamppi, laituri 50
+                            [31] => 2143A 2:Kamppi, laituri 50
+                            [32] => 2143K 2:Kamppi, laituri 50
+                            [33] => 2143T 2:Kamppi, laituri 50
+                            [34] => 2145  2:Kamppi, laituri 50
+                            [35] => 2145K 2:Kamppi, laituri 50
+                            [36] => 2145KN2:Kamppi, laituri 50
+                            [37] => 2145N 2:Kamppi, laituri 50
+                            [38] => 2147  2:Kamppi, laituri 51
+                            [39] => 2147K 2:Kamppi, laituri 51
+                            [40] => 2147KT2:Kamppi, laituri 51
+                            [41] => 2147T 2:Kamppi, laituri 51
+                            [42] => 2150  2:Kamppi, laituri 52
+                            [43] => 2150A 2:Kamppi, laituri 52
+                            [44] => 2154  2:Kamppi, laituri 53
+                            [45] => 2154T 2:Kamppi, laituri 53
+                            [46] => 2156  2:Kamppi, laituri 53
+                            [47] => 2158  2:Kamppi, laituri 54
+                            [48] => 2160  2:Kamppi, laituri 54
+                            [49] => 2160K 2:Kamppi, laituri 54
+                            [50] => 2160KT2:Kamppi, laituri 54
+                            [51] => 2160T 2:Kamppi, laituri 54
+                            [52] => 2165  2:Kamppi, laituri 55
+                            [53] => 2165N 2:Kamppi, laituri 55
+                            [54] => 2165V 2:Kamppi, laituri 55
+                            [55] => 2501  2:Vattuniemi
+                            [56] => 2501V 2:Vattuniemi
+                            [57] => 7167T 2:Linja-autoas,l.16
+                            [58] => 7175KM2:Helsinki
+                            [59] => 7175L 2:Linja-autoasema
+                            [60] => 7175M 2:Linja-autoasema
+                            [61] => 7175MK2:Linja-autoasema
+                            [62] => 7175MN2:Linja-autoasema
+                            [63] => 7175MT2:Helsinki
+                            [64] => 7175MV2:Linja-autoasema
+                            [65] => 7175X 2:Linja-autoasema
+                            [66] => 7175XK2:Linja-autoasema
+                            [67] => 7176MK2:Linja-autoasema
+                            [68] => 7176MV2:Linja-autoasema
+                            [69] => 7177L 2:Linja-autoasema
+                            [70] => 7177LT2:Linja-autoasema
+                            [71] => 7177M 2:Linja-autoasema
+                            [72] => 7177MK2:Linja-autoasema
+                            [73] => 7177MT2:Linja-autoasema
+                            [74] => 7177X 2:Linja-autoasema
+                            [75] => 7177XE2:Linja-autoasema
+                            [76] => 7177XT2:Helsinki
+                            [77] => 7177XV2:Linja-autoasema
+                            [78] => 7178M 2:Linja-autoasema
+                            [79] => 7178MK2:Linja-autoasema
+                            [80] => 7178MN2:Linja-autoasema
+                            [81] => 7178MT2:Helsinki
+                            [82] => 7180L 2:Linja-autoasema
+                            [83] => 7180LE2:Linja-autoasema
+                            [84] => 7180M 2:Linja-autoasema
+                            [85] => 7180MK2:Linja-autoasema
+                            [86] => 7180S 2:Helsinki
+                            [87] => 7180X 2:Linja-autoasema
+                            [88] => 7180XK2:Linja-autoasema
+                            [89] => 7181L 2:Linja-autoasema
+                            [90] => 7181M 2:Linja-autoasema
+                            [91] => 7181MA2:Helsinki
+                            [92] => 7181MV2:Linja-autoasema
+                            [93] => 7181SE2:Linja-autoasema
+                            [94] => 7181XE2:Helsinki
+                            [95] => 7182KM2:Helsinki
+                            [96] => 7182M 2:Linja-autoasema
+                            [97] => 7182MK2:Linja-autoasema
+                            [98] => 7182X 2:Linja-autoasema
+                            [99] => 7182XA2:Linja-autoasema
+                            [100] => 7182XK2:Linja-autoasema
+                            [101] => 7185E 2:Linja-autoasema
+                            [102] => 7186M 2:Linja-autoasema
+                            [103] => 7186XK2:Linja-autoasema
+                            [104] => 7189L 2:Linja-autoasema
+                            [105] => 7189M 2:Linja-autoasema
+                            [106] => 7189MC2:Helsinki
+                            [107] => 7189MK2:Linja-autoasema
+                            [108] => 7189MN2:Linja-autoasema
+                            [109] => 7189MV2:Helsinki
+                            [110] => 7189S 2:Linja-autoasema
+                            [111] => 7189X 2:Linja-autoasema
+                            [112] => 7190  2:Linja-autoasema
+                        )
+
+                    [transport_type_id] => 1
+                )
+
+        )
+
+    [6] => Array
+        (
+            [locType] => stop
+            [locTypeId] => 10
+            [name] => Hanasaari
+            [matchedName] => Hanasaari
+            [lang] => fi
+            [city] => Helsinki
+            [coords] => 2553562,6674887
+            [details] => Array
+                (
+                    [address] => Sörnäisten rantatie
+                    [code] => 1100102
+                    [shortCode] => 2514
+                    [changeCost] => 1
+                    [lines] => Array
+                        (
+                            [0] => 1011  1:Korkeasaari
+                            [1] => 1016  1:Herttoniemi(M)
+                            [2] => 1068  1:Latokartano
+                            [3] => 1085N 1:Jollas
+                            [4] => 1086N 1:Santahamina
+                            [5] => 1090A 1:Vuosaaren satama
+                            [6] => 1090N 1:Vuosaari
+                            [7] => 1092N 1:Kontula (Keinutie)
+                            [8] => 1094N 1:Kontulankaari
+                            [9] => 1094N31:Kontulankaari
+                            [10] => 1095N 1:Länsimäki
+                            [11] => 1096N 1:Vuosaari
+                            [12] => 1097N 1:Kotikonnuntie
+                        )
+
+                    [transport_type_id] => 1
+                )
+
+        )
+
+    [7] => Array
+        (
+            [locType] => stop
+            [locTypeId] => 10
+            [name] => Hanasaari
+            [matchedName] => Hanasaari
+            [lang] => fi
+            [city] => Helsinki
+            [coords] => 2553570,6674934
+            [details] => Array
+                (
+                    [address] => Sörnäisten rantatie
+                    [code] => 1100103
+                    [shortCode] => 2515
+                    [changeCost] => 1
+                    [lines] => Array
+                        (
+                            [0] => 1011  2:Rautatientori
+                            [1] => 1016  2:Hernesaari
+                            [2] => 1068  2:Rautatientori
+                            [3] => 1085N 2:Rautatientori
+                            [4] => 1086N 2:Rautatientori
+                            [5] => 1090A 2:Rautatientori
+                            [6] => 1090N 2:Rautatientori
+                            [7] => 1092N 2:Rautatientori
+                            [8] => 1094N 2:Rautatientori
+                            [9] => 1094N32:Rautatientori
+                            [10] => 1095N 2:Rautatientori
+                            [11] => 1096N 2:Rautatientori
+                            [12] => 1097N 2:Rautatientori
+                        )
+
+                    [transport_type_id] => 1
+                )
+
+        )
+
+)
