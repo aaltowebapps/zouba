@@ -3,8 +3,7 @@ var Location = Backbone.Model.extend({
         return {
             name: "",
             address: "",
-            latitude: null,
-            longitude: null
+            coords: null
         };
     },
 
@@ -32,31 +31,39 @@ var Location = Backbone.Model.extend({
         var url = baseUrl+parameters.join("&");
 
         console.log("url:"+url);
-        /*$.get(url, function(text) {
-            console.log("text:"+text);
-        });*/
+        // works with chrome --disable-web-security, but how to make work regularly
+        // replaced url with local json file to avoid unnecessary requests to server during development
+        $.getJSON("../js/response.json", function(json) {
+            var $results = $("#results");
+            $results.text(json[0].coords);
+        });
+        /*
+           $.get(url, function(json) {
+            console.log("json:"+json);
+        });
         $.ajax({
             url:        url,
-            dataType:   "jsonp",
+            dataType:   "json",
             converters: {
-                "text jsonp": function( text ) {
-                    return jquery.parseJSON(text);
+                "text jsonp": function( json ) {
+                    return jquery.parseJSON(json);
                 }
             },
-            success:    function(data){
+            success:    function(json){
                 $("#results").text(json);
             }
         });
+         */
     },
 
+    /*
     geocodeAddressUsingWorker: function() {
                                    var worker = new Worker('geocoder.js');
 
                                    worker.addEventListener('message', function(e) {
                                        var noOptions = e.data.length;
                                        if ( noOptions === 1 ) {
-                                           this.set("latitude", e.data[0].latitude);
-                                           this.set("longitude", e.data[0].longitude);
+                                           this.set("coords", e.data[0].coords);
                                        } else {
                                            // trigger UI to have user choose correct address
                                        }
@@ -64,5 +71,6 @@ var Location = Backbone.Model.extend({
 
                                    worker.postMessage({'cmd': 'start', 'address': address });
                                }
+                               */
 
 });
