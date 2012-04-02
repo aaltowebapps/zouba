@@ -6,5 +6,8 @@
     "launch": {
       "local_path": "html/lm-test.html"
     }
-  }
+  },
+  "permissions": [
+      "http://api.reittiopas.fi/*"
+  ]
 }
