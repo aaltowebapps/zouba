@@ -30,9 +30,42 @@
           $("#refresh").bind("click", function(e) {
             e.preventDefault();
           });
-          $("#save").bind("click", function(e) {
+          $("#save_local").bind("click", function(e) {
             e.preventDefault();
           });
+           $("#save_server").bind("click", function(e) {
+            e.preventDefault();
+          });
+        })
+      //]]>
+    </script>
+    
+    <script type='text/javascript'>
+      //<![CDATA[
+        var myLatLng;
+        var map;
+        var marker;
+        
+        $(function() {
+          //Get position fast and initialized google map
+          navigator.geolocation.getCurrentPosition(function(geodata) {
+            myLatLng = new google.maps.LatLng(geodata.coords.latitude, geodata.coords.longitude);
+            
+            var myOptions = { center: myLatLng, zoom: 8, mapTypeId: google.maps.MapTypeId.ROADMAP };
+            map = new google.maps.Map(document.getElementById("map"), myOptions);
+        
+            marker = new google.maps.Marker( { position: myLatLng, map: map, title:"My position" });
+          });
+          //Update the position at least every 5 seconds and use GPS if available
+          navigator.geolocation.watchPosition(function(geodata) {
+            $(".latitude").html(geodata.coords.latitude);
+            $(".longitude").html(geodata.coords.longitude);
+
+            
+            myLatLng = new google.maps.LatLng(geodata.coords.latitude, geodata.coords.longitude);
+            marker.setPosition(myLatLng);
+            map.setCenter(myLatLng);
+          },function() {},{enableHighAccuracy:true, maximumAge:30000, timeout:5000} );  
         })
       //]]>
     </script>
@@ -43,7 +76,20 @@
         <h1>Lab4 template</h1>
       </div>
       <div data-role="content">
-        <canvas id="canvas"></canvas>
+      
+    <strong>Your Location</strong>
+    <br />
+    Latitude:
+    <span class='latitude'></span>
+    <br />
+    Longitude:
+    <span class='longitude'></span>
+    <br />
+
+
+      
+        <canvas id="canvas">
+        </canvas>
       </div>
       <div data-role="footer" data-position="fixed">
         <div data-role="navbar">
@@ -52,7 +98,10 @@
               <a href="#home" id="refresh">Refresh</a>
             </li>
             <li>
-              <a href="#home" id="save">Save</a>
+              <a href="#home" id="save_local">Save locally</a>
+            </li>
+            <li>
+              <a href="#home" id="save_server">Save to server</a>
             </li>
           </ul>
         </div>
