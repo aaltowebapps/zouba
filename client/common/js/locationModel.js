@@ -8,12 +8,17 @@ var Location = Backbone.Model.extend({
     },
 
     initialize: function() {
+        if ( this.get("address") != "" ) {
+            this.geocodeAddress();
+        }
+
         this.bind("change:address", function() {
             this.geocodeAddress();
         } );
     },
 
     geocodeAddress: function() {
+        var self = this;
         //var baseUrl = "http://localhost/zouba/client/common/apiProxy/hsl/prod/?";
         var baseUrl = "http://api.reittiopas.fi/hsl/prod/?";
         var coordSystem = "wgs84";
@@ -33,12 +38,8 @@ var Location = Backbone.Model.extend({
         var url = baseUrl+parameters.join("&");
 
         console.log("url:"+url);
-        // works with chrome --disable-web-security, but how to make work regularly
-        // replaced url with local json file to avoid unnecessary requests to server during development
-        //$.getJSON("../js/response.json", function(json) {
-        $.getJSON(url, function(json) {
-            //this.set("coords", json[0].coords);
-            console.log("hello");
+        $.getJSON("../js/response.json", function(json) {
+            self.set("coords", json[0].coords);
         });
 
         /* other attempts to work around the 

@@ -1,10 +1,17 @@
+var Templates = {};
+
+$(document).ready(function() {
+    $('script[type="text/x-handlebars-template"]').each(function () {
+        Templates[this.id] = Handlebars.compile($(this).html());
+    });
+});
+
 var LocationView = Backbone.View.extend({
     tagName: "li",
 
-    template: _.template($('#item-template')).html(),
-
     initialize: function() {
         this.model.bind('change:coords', this.render, this);
+        this.template = Templates.location;
     },
 
     render: function() {

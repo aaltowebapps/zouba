@@ -1,9 +1,13 @@
 (function() {
     $(document).ready(function () {
-        var location = new Location({
-            "name": "work"
-        });
-        location.set({ "address": "westeninkatu 7, espoo" });
+        var locations = new LocationsModel();
+
+        var locationsView = new LocationsView({collection: locations});
+
+        locations.create({
+            "name": "work",
+            "address": "westeninkatu 7, espoo"
+        }, {at: 0});
     });
 }());
 
