@@ -77,11 +77,11 @@
         
           //gamma: left to right
           //$(".beta").html(event.beta);
-          point.xaccel = event.beta;
+          point.xaccel = event.beta/5;
         
           //beta: front back motion  
           //$(".gamma").html(event.gamma);
-          point.yaccel = event.gamma;
+          point.yaccel = -event.gamma/5;
         }, false);
       //]]>
     </script>
