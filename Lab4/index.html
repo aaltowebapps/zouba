@@ -44,10 +44,11 @@
             e.preventDefault();
           });
           
+          //draw every 30 fps
           var timer1 = setInterval(function() {
-              clear_canvas(ctx);
+              //clear_canvas(ctx); // this is commented so that it doesnt delete the point but draws like a line
               draw_point(ctx, point);
-          }, 1000/30);
+          }, 1000/30); 
         })
         
         function clear_canvas(ctx) {
