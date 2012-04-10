@@ -9,7 +9,11 @@
             },
 
             render: function(){
-                $(this.el).html('<span>'+this.model.get('name')+':'+this.model.get('address')+'</span>');
+                var bits = [];
+                bits.push( this.model.get('name') );
+                bits.push( this.model.get('address') );
+                bits.push( this.model.get('coords') );
+                $(this.el).html('<span>'+bits.join(':')+'</span>');
                 return this;
             }
         });

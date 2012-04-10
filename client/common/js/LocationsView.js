@@ -9,7 +9,10 @@
             },
 
             initialize: function(){
-                _.bindAll(this, 'render', 'addLocation', 'appendLocation');
+                _.bindAll(this,
+                    'render',
+                    'addLocation',
+                    'appendLocation');
 
                 this.collection = new Locations();
                 this.collection.bind('add', this.appendLocation);
@@ -30,7 +33,8 @@
                 this.counter++;
                 var location = new Location();
                 location.set({
-                    name: location.get('name') + this.counter
+                    name: 'work' + this.counter,
+                    address: 'Westendinkatu ' + this.counter + ', Espoo'
                 });
                 this.collection.add(location);
             },
@@ -39,6 +43,7 @@
                 var locationView = new LocationView({
                     model: location
                 });
+                location.bind("change:coords", locationView.render);
                 $('ul', this.el).append(locationView.render().el);
                 $('ul').listview("refresh");
             }
