@@ -1,0 +1,7 @@
+  HTTP/1.1 200 OK
+  Server: nginx/0.7.67
+  Date: Mon, 02 Apr 2012 06:17:13 GMT
+  Content-Type: text/plain; charset: utf-8; charset=iso-8859-1
+  Connection: close
+  X-Powered-By: PHP/5.3.3-7+squeeze8
+  Vary: Accept-Encoding
