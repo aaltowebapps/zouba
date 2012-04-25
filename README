@@ -1,0 +1,9 @@
+To install and run ZouBa :
+
+1) install google chrome on your desktop machine : <https://www.google.com/chrome>
+2) open url <chrome://extensions>
+3) check the box next to 'Developer mode'
+4) click 'Load inpacked extension...'
+5) select the client/common directory from the git clone
+6) click on the 'new tab' button in chrome (little trapezoid next to the top tab)
+7) click on the 'ZouBa' icon (you may have to click on a '>' or '<' to get to the page with the extensions on)
