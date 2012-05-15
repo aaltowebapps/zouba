@@ -1,9 +1,4 @@
-(function($){
-
-    $(document).ready(function () {
-        Locations = Backbone.Collection.extend({
-            model: Location
-        });
-    });
-
-})(jQuery);
+var Locations = Backbone.Collection.extend({
+    model: Location, 
+    localStorage: new Backbone.LocalStorage("LocationsList")
+});

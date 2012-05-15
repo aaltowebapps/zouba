@@ -1,7 +1,7 @@
 self.addEventListener('message', function(e) {
 
     var geocodeAddress = function() {
-	    var baseUrl: "http://api.reittiopas.fi/hsl/prod/?";
+	    var baseUrl = "http://api.reittiopas.fi/hsl/prod/?";
         var coordSystem = "wgs84";
         var parameters = [
             "request=geocode",
