@@ -6,9 +6,13 @@
 	    <meta content='width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0;' name='viewport' />
 	    
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/datebox/latest/jquery.mobile.datebox.min.css" /> 
 
 		<script src="http://code.jquery.com/jquery-1.7.1.js"></script>
 		<script src="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.js"></script>
+		
+		<script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/latest/jquery.mobile.datebox.min.js"></script>
+		<script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/i8n/jquery.mobile.datebox.i8n.en.js"></script>
 
         <script src="../js/handlebars-1.0.0.beta.6.js"></script>
         <script src="../js/underscore.js"></script>
@@ -40,9 +44,9 @@
 			<div data-role='content'>
               	<!-- <a data-transition='flip' href='#search'>New Route</a> -->
 	        	<ul data-role='listview' id='routesList'>
-	        		<li><a data-transition='flip' href='#search'>Search</a></li>
+	        		<li><a href='#search'>Search</a></li>
 	        		<div class="ui-bar-a" style="padding-left: 0.8em;"><h6>Saved routes:</h6></div>
-					<li><a data-transition='flip' href='#timetable'>WORK to HOME</a></li>
+					<li><a href='#timetable'>WORK to HOME</a></li>
 	        	</ul>
 		  	</div>
 			<footer data-position="fixed" data-role="footer" data-tap-toggle="false">
@@ -55,19 +59,28 @@
 		        <h1>Search Route</h1>
 			</header>
 			<div data-role='content'>
-				<input type="search" name="start" id="search_start" placeholder="Start address" value="" />
-				<input type="search" name="destination" id="search_dest" placeholder="Destination address" value="" />
-				<input name="time" id="search_time" type="date" data-role="datebox"
-   					data-options='{"mode": "timeflipbox"}' placeholder="12:00">
-   				<input name="date" id="search_date" type="date" data-role="datebox"
-   					data-options='{"mode": "flipbox"}' placeholder="Today">
-				<a href="#timetable" data-role="button" data-icon="search">Search</a>
+				<form action="" method="post">
+					<input type="search" name="start" id="search_start" placeholder="Start address" value="" />
+					<br>
+					<input type="search" name="destination" id="search_dest" placeholder="Destination address" value="" />
+					<br>
+					
+					<div style="margin-right: 0.5em;">
+						<input name="time" id="search_time" type="date" data-role="datebox"
+   							data-options='{"mode": "timeflipbox"}'>
+   						<br>
+   						<input name="date" id="search_date" type="date" data-role="datebox"
+   							data-options='{"mode": "flipbox"}'>	
+   					</div>	
+   					<br>
+   				</form>
+				<a href="#timetable" data-role="button" id="search_button">Search</a>
 		  	</div>
 			<footer data-position="fixed" data-role="footer">
 				<h6>&copy; Zouba - 2012 - Aalto University</h6>
 			</footer>
 		</div>
-		<!-- Route details page -->
+		<!-- Timetable page -->
 		<div data-role="page" id="timetable" data-add-back-btn="true">
 			<header data-position="fixed" data-role="header">
 		        <h1>Timetable</h1>
