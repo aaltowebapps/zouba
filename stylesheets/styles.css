@@ -5,6 +5,7 @@ body {
   font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   color:#777;
   font-weight:300;
+
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -48,6 +49,8 @@ a small {
 .wrapper {
   width:860px;
   margin:0 auto;
+  
+  
 }
 
 blockquote {
@@ -253,3 +256,14 @@ footer {
     color:#444;
   }
 }
+
+/*mystuff*/
+
+.subtitle{
+	font-style:italic;
+	}
+	
+.banner {
+	 background-image:url(../img/kartta.jpg);
+	 background-repeat:no-repeat;
+ }
