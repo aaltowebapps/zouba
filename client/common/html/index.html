@@ -6,9 +6,13 @@
 	    <meta content='width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0;' name='viewport' />
 	    
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.css" />
+		<link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/datebox/latest/jquery.mobile.datebox.min.css" /> 
 
 		<script src="http://code.jquery.com/jquery-1.7.1.js"></script>
 		<script src="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.js"></script>
+		
+		<script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/latest/jquery.mobile.datebox.min.js"></script>
+		<script type="text/javascript" src="http://dev.jtsage.com/cdn/datebox/i8n/jquery.mobile.datebox.i8n.en.js"></script>
 
         <script src="../js/json2.js"></script>
         <script src="../js/underscore.js"></script>
@@ -45,12 +49,7 @@
 	        	<ul data-role='listview' id='routesList'>
 	        		<li><a data-transition='flip' href='#search'>Search</a></li>
 	        		<div class="ui-bar-a" style="padding-left: 0.8em;"><h6>Saved routes:</h6></div>
-					<li><a data-transition='flip' href='#route_detail'>WORK to HOME</a></li>
-					<li><a data-transition='flip' href="#">HOME to WORK</a></li>
-					<li><a data-transition='flip' href="#">WORK to UNI</a></li>
-					<li><a data-transition='flip' href="#">WORK to SWIMMING POOL</a></li>
-					<li><a data-transition='flip' href="#">GPS to HOME</a></li>
-			</ul>
+					<li><a data-transition='flip' href='#timetable'>WORK to HOME</a></li>
 	        	</ul>
 		  	</div>
 			<footer data-position="fixed" data-role="footer" data-tap-toggle="false">
@@ -63,19 +62,48 @@
 		        <h1>Search Route</h1>
 			</header>
 			<div data-role='content'>
-				<!-- Still have to add the logic here! -->
+				<input type="search" name="start" id="search_start" placeholder="Start address" value="" />
+				<input type="search" name="destination" id="search_dest" placeholder="Destination address" value="" />
+				<input name="time" id="search_time" type="date" data-role="datebox"
+   					data-options='{"mode": "timeflipbox"}' placeholder="12:00">
+   				<input name="date" id="search_date" type="date" data-role="datebox"
+   					data-options='{"mode": "flipbox"}' placeholder="Today">
+				<a href="#timetable" data-role="button" data-icon="search">Search</a>
 		  	</div>
 			<footer data-position="fixed" data-role="footer">
 				<h6>&copy; Zouba - 2012 - Aalto University</h6>
 			</footer>
 		</div>
-		<!-- Route details page -->
-		<div data-role="page" id="route_detail" data-add-back-btn="true">
+		<!-- Timetable page -->
+		<div data-role="page" id="timetable" data-add-back-btn="true">
 			<header data-position="fixed" data-role="header">
 		        <h1>Timetable</h1>
+		        <a href="#" data-icon="star" class="ui-btn-right">Save</a>
 			</header>
 			<div data-role='content'>
-	        	<ul data-role='listview' id='routesDetailList'></ul>
+				<h3>WORK to HOME</h3>
+                <div data-role="collapsible-set" id="times">
+                    <div data-role="collapsible" data-collapsed="false">
+	                    <h3>07:35 102T/111 07:43</h3>
+	                    <p>Info about this route.</p>
+	                </div>
+	                <div data-role="collapsible" data-collapsed="true">
+	                    <h3>07:45 103T/111 07:50</h3>
+	                    <p>Info about this route.</p>
+	                </div>
+	                <div data-role="collapsible" data-collapsed="true">
+	                    <h3>08:03 111T      08:10</h3>
+	                    <p>Info about this route.</p>
+	                </div>
+	                <div data-role="collapsible" data-collapsed="true">
+	                    <h3>08:10 109T/111 08:25</h3>
+	                    <p>Info about this route.</p>
+	                </div>    
+	                <div data-role="collapsible" data-collapsed="true">
+	                    <h3>08:24 106T/111 08:35</h3>
+	                    <p>Info about this route.</p>
+	                </div>
+                </div>
 		  	</div>
 			<footer data-position="fixed" data-role="footer">
 				<h6>&copy; Zouba - 2012 - Aalto University</h6>
