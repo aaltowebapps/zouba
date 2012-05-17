@@ -34,9 +34,10 @@ h3, h4, h5, h6 {
 }
 
 a {
-  color:#39c;
-  font-weight:400;
-  text-decoration:none;
+	color:#39c;
+	font-weight:400;
+	text-decoration:none;
+	text-align: center;
 }
 
 a small {
