@@ -47,9 +47,9 @@
 			<div data-role='content'>
               	<!-- <a data-transition='flip' href='#search'>New Route</a> -->
 	        	<ul data-role='listview' id='routesList'>
-	        		<li><a data-transition='flip' href='#search'>Search</a></li>
+	        		<li><a href='#search'>Search</a></li>
 	        		<div class="ui-bar-a" style="padding-left: 0.8em;"><h6>Saved routes:</h6></div>
-					<li><a data-transition='flip' href='#timetable'>WORK to HOME</a></li>
+					<li><a href='#timetable'>WORK to HOME</a></li>
 	        	</ul>
 		  	</div>
 			<footer data-position="fixed" data-role="footer" data-tap-toggle="false">
@@ -62,13 +62,23 @@
 		        <h1>Search Route</h1>
 			</header>
 			<div data-role='content'>
-				<input type="search" name="start" id="search_start" placeholder="Start address" value="" />
-				<input type="search" name="destination" id="search_dest" placeholder="Destination address" value="" />
-				<input name="time" id="search_time" type="date" data-role="datebox"
-   					data-options='{"mode": "timeflipbox"}' placeholder="12:00">
-   				<input name="date" id="search_date" type="date" data-role="datebox"
-   					data-options='{"mode": "flipbox"}' placeholder="Today">
-				<a href="#timetable" data-role="button" data-icon="search">Search</a>
+				<form action="" method="post">
+					<input type="search" name="start" id="search_start" placeholder="Start address" value="" />
+					<br>
+					<input type="search" name="destination" id="search_dest" placeholder="Destination address" value="" />
+					<br>
+					
+					<div style="margin-right: 0.5em;">
+						<input name="time" id="search_time" type="date" data-role="datebox"
+   							data-options='{"mode": "timeflipbox"}'>
+   						<br>
+   						<input name="date" id="search_date" type="date" data-role="datebox"
+   							data-options='{"mode": "flipbox"}'>	
+   					</div>	
+   					<br>
+   				</form>
+				<a href="#timetable" data-role="button" id="search_button">Search</a>
+				
 		  	</div>
 			<footer data-position="fixed" data-role="footer">
 				<h6>&copy; Zouba - 2012 - Aalto University</h6>
