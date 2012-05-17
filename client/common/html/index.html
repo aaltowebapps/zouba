@@ -32,7 +32,8 @@
     		<li><a href="#timetable" class="ui-link" id="fetch">{{name}}</a></li>
     	</script>
     	<!-- Template for the route's details element in the routes details page -->
-    	<script id="route_detail" type="text/x-handlebars-template">
+    	<script id="timetableelement" type="text/x-handlebars-template">
+    		{{ bus }} - {{ departure }} - {{ arrival }}
     	</script>
     	
     	<!-- Routes list page -->
@@ -89,29 +90,7 @@
 		        <a href="#" data-icon="star" class="ui-btn-right">Save</a>
 			</header>
 			<div data-role='content'>
-				<h3>WORK to HOME</h3>
-                <div data-role="collapsible-set" id="times">
-                    <div data-role="collapsible" data-collapsed="false">
-	                    <h3>07:35 102T/111 07:43</h3>
-	                    <p>Info about this route.</p>
-	                </div>
-	                <div data-role="collapsible" data-collapsed="true">
-	                    <h3>07:45 103T/111 07:50</h3>
-	                    <p>Info about this route.</p>
-	                </div>
-	                <div data-role="collapsible" data-collapsed="true">
-	                    <h3>08:03 111T      08:10</h3>
-	                    <p>Info about this route.</p>
-	                </div>
-	                <div data-role="collapsible" data-collapsed="true">
-	                    <h3>08:10 109T/111 08:25</h3>
-	                    <p>Info about this route.</p>
-	                </div>    
-	                <div data-role="collapsible" data-collapsed="true">
-	                    <h3>08:24 106T/111 08:35</h3>
-	                    <p>Info about this route.</p>
-	                </div>
-                </div>
+				<ul data-role='listview' id="timetablelist"></ul>
 		  	</div>
 			<footer data-position="fixed" data-role="footer">
 				<h6>&copy; Zouba - 2012 - Aalto University</h6>

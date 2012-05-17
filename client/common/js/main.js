@@ -1,5 +1,6 @@
 var Templates = {};
 var routeslist;
+var timetables;
 
 /**
  * BACKBONE MODELS AND COLLECTIONS
@@ -11,7 +12,16 @@ var Route = Backbone.Model.extend({
 
 var RouteList = Backbone.Collection.extend({ 
 	model: Route,
-    localStorage: new Backbone.LocalStorage("RoutesList")
+    localStorage: new Backbone.LocalStorage("RouteList")
+});
+
+/* Timetable Model and Collection */
+var TimeTable = Backbone.Model.extend({
+});
+
+var TimeTableList = Backbone.Collection.extend({ 
+	model: Route,
+    localStorage: new Backbone.LocalStorage("TimeTableList")
 });
 
 $(function() {
@@ -82,10 +92,47 @@ $(function() {
 			return this;
 		},
 	});
-	var exroute = new Route({name: "Kamppi to Otaniemi", start: "2551881,6673379", end: "2546489,6675524"});
+	
+	
+	var TimeTableView = Backbone.View.extend ({
+		tagName: "li",
+		events: {
+		},
+		initialize: function() {
+			this.template = Templates.timetableelement;
+			this.model.bind('all', this.render, this);
+		},
+		render: function() {
+			$(this.el).html( this.template(this.model.toJSON()) );
+			return this;
+		}
+	});
+	
+	var TimeTableListView = Backbone.View.extend ({
+		el: $("#timetablelist"),
+		events: {
+		},
+		initialize: function() {
+			this.collection.bind('all', this.render, this);
+		},
+		render: function() {
+			var el = this.$el;
+			el.empty();
+			this.collection.each(function(item) {
+				var rv = new TimeTableView({model: item});
+				el.append(rv.render().el);
+			});
+			return this;
+		}
+	});
+	
+	//var exroute = new Route({name: "Kamppi to Otaniemi", start: "2551881,6673379", end: "2546489,6675524"});
 	routeslist = new RouteList;
 	var routesListView = new RoutesListView({collection: routeslist});
-	routeslist.add(exroute);
+	//routeslist.add(exroute);
+	
+	timetables = new TimeTableList;
+	var timetableslistView = new TimeTableListView({collection: timetables});
 });
 
 function SearchButtonPressed() {
@@ -153,9 +200,24 @@ function fetchTimetable(time, date, from, to) {
     if(time != "") 
     	parameters.push("time="+time);
     var url = baseUrl+parameters.join("&");
-    $.getJSON(url, function(data) {
-	    alert(data);
-	    // put it in the array that contains the route details
-		// and load the details page	
+    $.getJSON(url, function(json) {
+    	var buses = "";
+    	for(i=0; i<json.length; ++i) {
+    		for(j=0; j<json[i].length; ++j){
+    			var el = json[i][j];
+    			for(k=0; k<el.legs.length; ++k){
+    				if(el.legs[k].type != "walk"){
+    					var te = new TimeTable({bus: el.legs[k].code});
+    					te.set("departure", el.legs[k].locs[0].depTime);
+    					te.set("arrival",el.legs[k].locs[el.legs[k].locs.length-1].arrTime);
+    					timetables.add(te);
+    					
+    				}
+    			}
+    		}
+    	}
+    	
+	    // put it in the array that contains the timetables
+		// and load the details page
     });
 }
