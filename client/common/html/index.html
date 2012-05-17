@@ -41,8 +41,17 @@
 		        <h1>Routes</h1>
 			</header>
 			<div data-role='content'>
-              	<a data-transition='flip' href='#search'>New Route</a>
-	        	<ul data-role='listview' id='routesList'></ul>
+              	<!-- <a data-transition='flip' href='#search'>New Route</a> -->
+	        	<ul data-role='listview' id='routesList'>
+	        		<li><a data-transition='flip' href='#search'>Search</a></li>
+	        		<div class="ui-bar-a" style="padding-left: 0.8em;"><h6>Saved routes:</h6></div>
+					<li><a data-transition='flip' href='#route_detail'>WORK to HOME</a></li>
+					<li><a data-transition='flip' href="#">HOME to WORK</a></li>
+					<li><a data-transition='flip' href="#">WORK to UNI</a></li>
+					<li><a data-transition='flip' href="#">WORK to SWIMMING POOL</a></li>
+					<li><a data-transition='flip' href="#">GPS to HOME</a></li>
+			</ul>
+	        	</ul>
 		  	</div>
 			<footer data-position="fixed" data-role="footer" data-tap-toggle="false">
 		        <h6>&copy; Zouba - 2012 - Aalto University</h6>
@@ -51,7 +60,7 @@
 		<!-- New route page -->
     	<div data-role="page" id="search" data-add-back-btn="true">
     		<header data-position="fixed" data-role="header">
-		        <h1>Create Route</h1>
+		        <h1>Search Route</h1>
 			</header>
 			<div data-role='content'>
 				<!-- Still have to add the logic here! -->
@@ -63,7 +72,7 @@
 		<!-- Route details page -->
 		<div data-role="page" id="route_detail" data-add-back-btn="true">
 			<header data-position="fixed" data-role="header">
-		        <h1>Route Details</h1>
+		        <h1>Timetable</h1>
 			</header>
 			<div data-role='content'>
 	        	<ul data-role='listview' id='routesDetailList'></ul>
