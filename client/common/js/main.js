@@ -15,13 +15,10 @@ var RouteList = Backbone.Collection.extend({
 });
 
 $(function() {
-	//alert("main.js");
 	// Load the handlebars templates
 	$('script[type="text/x-handlebars-template"]').each(function () {
 	    Templates[this.id] = Handlebars.compile($(this).html());
 	});
-	
-//	alert("templates loaded");
 
 	// View for rendering the single saved route in the list
 	var RouteView = Backbone.View.extend ({
