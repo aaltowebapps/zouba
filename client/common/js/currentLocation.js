@@ -1,6 +1,4 @@
 
-var coords = {lat: "", lon: ""};
-
 function getLocation()
   {
   if (navigator.geolocation)
@@ -11,7 +9,9 @@ function getLocation()
   }
 function showPosition(position)
   {
-  coords.lat = position.coords.latitude;
-  coords.lon = position.coords.longitude;
+  var lat = position.coords.latitude;
+  var lng = position.coords.longitude;
+  
+  alert(lat + ', ' + lng);
+  
   }
-
