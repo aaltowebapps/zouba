@@ -546,6 +546,7 @@
 				EAD1C8121551C1E7007E7CE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
