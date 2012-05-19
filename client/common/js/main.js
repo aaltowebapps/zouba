@@ -185,6 +185,17 @@ function getToCoordinates(time, date, from) {
     });
 }
 
+function getDurationString(str) {
+	res = "";
+	str = parseInt(str);
+	if (str > 3600) {
+		res = parseInt(str/3600)+" h ";
+	}
+	
+	res = res + parseInt((str%3600)/60) + " min";
+	return res;
+}
+
 function fetchTimetable(time, date, from, to) {
 	var baseUrl = "http://api.reittiopas.fi/hsl/prod/?";
     var parameters = [
@@ -203,13 +214,17 @@ function fetchTimetable(time, date, from, to) {
     $.getJSON(url, function(json) {
     	var buses = "";
     	for(i=0; i<json.length; ++i) {
+    		var totalDuration = json[i].duration
     		for(j=0; j<json[i].length; ++j){
     			var el = json[i][j];
     			for(k=0; k<el.legs.length; ++k){
     				if(el.legs[k].type != "walk"){
-    					var te = new TimeTable({bus: el.legs[k].code});
-    					te.set("departure", el.legs[k].locs[0].depTime);
-    					te.set("arrival",el.legs[k].locs[el.legs[k].locs.length-1].arrTime);
+    					var te = new TimeTable({bus: el.legs[k].code.split(" ")[0].substring(1).replace(/^0+/, '')});
+    					var temp = el.legs[k].locs[0].depTime.substring(8);
+    					te.set("departure", temp.substr(0,2)+':'+temp.substr(2,2));
+    					temp = el.legs[k].locs[el.legs[k].locs.length-1].arrTime.substring(8);
+    					te.set("arrival", temp.substr(0,2)+':'+temp.substr(2,2));
+    					te.set("duration", getDurationString(el.duration));
     					timetables.add(te);
     					
     				}

@@ -33,7 +33,10 @@
     	</script>
     	<!-- Template for the route's details element in the routes details page -->
     	<script id="timetableelement" type="text/x-handlebars-template">
-    		{{ bus }} - {{ departure }} - {{ arrival }}
+    		<div data-role="collapsible" data-collapsed="true" id="timetableelement">
+    			<h3>{{ departure }} {{ bus }} {{ arrival }} {{ duration }}</h3>
+    			<p>Info about this route.</p>
+    		</div>
     	</script>
     	
     	<!-- Routes list page -->
@@ -90,7 +93,10 @@
 		        <a href="#" data-icon="star" class="ui-btn-right">Save</a>
 			</header>
 			<div data-role='content'>
-				<ul data-role='listview' id="timetablelist"></ul>
+				<!-- <ul data-role='listview' id="timetablelist"></ul>  -->
+				<div data-role="collapsible-set" id="timetablelist">
+					<div data-role="collapsible" data-collapsed="true" id="timetableelement"></div>
+				</div>
 		  	</div>
 			<footer data-position="fixed" data-role="footer">
 				<h6>&copy; Zouba - 2012 - Aalto University</h6>
