@@ -1,3 +1,4 @@
+
 var coords = {lat: "", lon: ""};
 
 function getLocation()
@@ -13,3 +14,4 @@ function showPosition(position)
   coords.lat = position.coords.latitude;
   coords.lon = position.coords.longitude;
   }
+
