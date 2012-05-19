@@ -195,19 +195,29 @@ function fetchTimetable(time, date, route, saved) {
 		// and load the details page
 		$.mobile.changePage('#timetable');
 		timetables.reset();
-    	var buses = "";
     	for(i=0; i<json.length; ++i) {
+    		// For every possible route
+    		var te = new TimeTable;
     		for(j=0; j<json[i].length; ++j){
+    			// The route element's general data is here
     			var el = json[i][j];
+    			te.set("duration",el.duration/60+" min");
+    			te.set("departure",el.legs[0].locs[0].depTime);
+    			te.set("arrival",el.legs[el.legs.length-1].locs[el.legs[el.legs.length-1].locs.length-1].arrTime);
+    			var buses = "";
+    			var details = "";
     			for(k=0; k<el.legs.length; ++k){
+    				// For every segment in the route
     				if(el.legs[k].type != "walk"){
-    					var te = new TimeTable({bus: el.legs[k].code});
-    					te.set("departure", el.legs[k].locs[0].depTime);
-    					te.set("arrival",el.legs[k].locs[el.legs[k].locs.length-1].arrTime);
-    					timetables.add(te);
+    					buses += el.legs[k].code+"/";
     				}
+    				// add to the details the start and end of the segment
+    				details +="";
     			}
+    			te.set("buses", buses);
+    			te.set("details", details);
     		}
+    		timetables.add(te);
     	}
     });
 }
