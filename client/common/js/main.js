@@ -6,7 +6,7 @@ var timetables;
  * BACKBONE MODELS AND COLLECTIONS
  **/
 
-/* Routes Model and Collection */
+/* Routes Model, Collection and Views*/
 var Route = Backbone.Model.extend({
 });
 
@@ -15,19 +15,18 @@ var RouteList = Backbone.Collection.extend({
     localStorage: new Backbone.LocalStorage("RouteList")
 });
 
-/* Timetable Model and Collection */
+/* Timetable Model, Collection and Views*/
 var TimeTable = Backbone.Model.extend({
 });
 
 var TimeTableList = Backbone.Collection.extend({ 
-	model: Route,
-    localStorage: new Backbone.LocalStorage("TimeTableList")
+	model: TimeTable
 });
 
 $(function() {
-	// Link the search button to the function
-	$("#search_button").click(function() {
-		SearchButtonPressed();
+	// Link the save button to the function
+	$("#saveRouteButton").click(function() {
+		SaveRouteButtonPressed();
 	});
 	
 	// Load the handlebars templates
@@ -51,25 +50,8 @@ $(function() {
 		},
 		loadDetails: function() {
 			// When the element is clicked from the list
-			// get the coordinates
-			var from = this.model.get("start");
-			var to = this.model.get("end");
 			// load the data from reittiopas
-			var baseUrl = "http://api.reittiopas.fi/hsl/prod/?";
-		    var parameters = [
-		        "request=route",
-		        "user=zouba",
-		        "pass=caf9r3ee",
-		        "format=json",
-		        "from="+from,
-		        "to="+to
-		    ];
-		    var url = baseUrl+parameters.join("&");
-		    $.getJSON(url, function(data) {
-			    alert(data);
-			    // put it in the array that contains the route details
-				// and load the details page	
-	        });
+			fetchTimetable("","",this.model,true);
 		}
 	});
 	
@@ -89,10 +71,10 @@ $(function() {
 				var rv = new RouteView({model: item});
 				el.append(rv.render().el);
 			});
+			el.listview("refresh");
 			return this;
 		},
 	});
-	
 	
 	var TimeTableView = Backbone.View.extend ({
 		tagName: "li",
@@ -122,6 +104,7 @@ $(function() {
 				var rv = new TimeTableView({model: item});
 				el.append(rv.render().el);
 			});
+			el.listview("refresh");
 			return this;
 		}
 	});
@@ -133,6 +116,8 @@ $(function() {
 	
 	timetables = new TimeTableList;
 	var timetableslistView = new TimeTableListView({collection: timetables});
+	
+	routeslist.fetch();
 });
 
 function SearchButtonPressed() {
@@ -168,7 +153,6 @@ function getFromCoordinates(time, date) {
     });
 }
 
-
 function getToCoordinates(time, date, from) {
 	var baseUrl = "http://api.reittiopas.fi/hsl/prod/?";
     var parameters = [
@@ -180,20 +164,21 @@ function getToCoordinates(time, date, from) {
     ];
     var url = baseUrl+parameters.join("&");
     $.getJSON(url, function(json) {
-    	fetchTimetable(time, date, from, json[0].coords);
-        //self.set("coords", json[0].coords);
+    	tempRoute = new Route({name: $("#search_start").val()+" to "+$("#search_dest").val(), start: from, end: json[0].coords});
+    	fetchTimetable(time, date, tempRoute, false);
     });
 }
 
-function fetchTimetable(time, date, from, to) {
+function fetchTimetable(time, date, route, saved) {
+	// Fetch the data
 	var baseUrl = "http://api.reittiopas.fi/hsl/prod/?";
     var parameters = [
         "request=route",
         "user=zouba",
         "pass=caf9r3ee",
         "format=json",
-        "from="+from,
-        "to="+to
+        "from="+route.get("start"),
+        "to="+route.get("end")
     ];
     if(date != "")
     	parameters.push("date="+date);
@@ -201,6 +186,15 @@ function fetchTimetable(time, date, from, to) {
     	parameters.push("time="+time);
     var url = baseUrl+parameters.join("&");
     $.getJSON(url, function(json) {
+    	if(saved)
+    		$("#saveRouteButton").hide();
+    	else
+    		$("#saveRouteButton").show();
+    	$("#routeName").html(route.get("name"));
+	    // put it in the array that contains the timetables
+		// and load the details page
+		$.mobile.changePage('#timetable');
+		timetables.reset();
     	var buses = "";
     	for(i=0; i<json.length; ++i) {
     		for(j=0; j<json[i].length; ++j){
@@ -211,13 +205,17 @@ function fetchTimetable(time, date, from, to) {
     					te.set("departure", el.legs[k].locs[0].depTime);
     					te.set("arrival",el.legs[k].locs[el.legs[k].locs.length-1].arrTime);
     					timetables.add(te);
-    					
     				}
     			}
     		}
     	}
-    	
-	    // put it in the array that contains the timetables
-		// and load the details page
     });
+}
+
+var tempRoute;
+function SaveRouteButtonPressed() {
+	routeslist.add(tempRoute);
+	tempRoute.save();
+	alert("Route Saved!");
+	$("#saveRouteButton").hide();
 }

@@ -29,11 +29,12 @@
     	</script>
     	<!-- Template for the route's element in the routes list page -->
     	<script id="route" type="text/x-handlebars-template">
-    		<li><a href="#timetable" class="ui-link" id="fetch">{{name}}</a></li>
+    		<li><a href="#" class="ui-link" id="fetch">{{name}}</a></li>
     	</script>
     	<!-- Template for the route's details element in the routes details page -->
     	<script id="timetableelement" type="text/x-handlebars-template">
-    		{{ bus }} - {{ departure }} - {{ arrival }}
+            <h3>{{ departure }} {{ bus }} {{ arrival }}</h3>
+            <ul><li>Info about this route.</li></ul>
     	</script>
     	
     	<!-- Routes list page -->
@@ -61,10 +62,10 @@
 		        <h1>Search Route</h1>
 			</header>
 			<div data-role='content'>
-				<form action="" method="post">
-					<input type="search" name="start" id="search_start" placeholder="Start address" value="" />
+				<form action="javascript:SearchButtonPressed();" method="post">
+					<input type="search" name="start" id="search_start" placeholder="Start address" value="" required/>
 					<br>
-					<input type="search" name="destination" id="search_dest" placeholder="Destination address" value="" />
+					<input type="search" name="destination" id="search_dest" placeholder="Destination address" value="" required/>
 					<br>
 					
 					<div style="margin-right: 0.5em;">
@@ -75,9 +76,9 @@
    							data-options='{"mode": "flipbox"}'>	
    					</div>	
    					<br>
+					<button type="submit" id="searchButton">Search</button>
    				</form>
    				
-				<a href="#timetable" data-role="button" id="search_button">Search</a>
 		  	</div>
 			<footer data-position="fixed" data-role="footer">
 				<h6>&copy; Zouba - 2012 - Aalto University</h6>
@@ -87,9 +88,10 @@
 		<div data-role="page" id="timetable" data-add-back-btn="true">
 			<header data-position="fixed" data-role="header">
 		        <h1>Timetable</h1>
-		        <a href="#" data-icon="star" class="ui-btn-right">Save</a>
+		        <a href="#" data-icon="star" class="ui-btn-right" id="saveRouteButton">Save</a>
 			</header>
 			<div data-role='content'>
+				<h3 id="routeName"></h3>
 				<ul data-role='listview' id="timetablelist"></ul>
 		  	</div>
 			<footer data-position="fixed" data-role="footer">
