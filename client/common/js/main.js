@@ -205,7 +205,7 @@ function fetchTimetable(time, date, route, saved) {
 	    // put it in the array that contains the timetables
 		// and load the details page
 		$.mobile.changePage('#timetable');
-		//timetables.reset();
+		timetables.reset();
     	for(i=0; i<json.length; ++i) {
     		// For every possible route
     		var te = new TimeTable();
