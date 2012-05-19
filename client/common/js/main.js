@@ -169,6 +169,17 @@ function getToCoordinates(time, date, from) {
     });
 }
 
+function getDurationString(str) {
+	res = "";
+	str = parseInt(str);
+	if (str > 3600) {
+		res = parseInt(str/3600)+" h ";
+	}
+	
+	res = res + parseInt((str%3600)/60) + " min";
+	return res;
+}
+
 function fetchTimetable(time, date, route, saved) {
 	// Fetch the data
 	var baseUrl = "http://api.reittiopas.fi/hsl/prod/?";
@@ -194,14 +205,14 @@ function fetchTimetable(time, date, route, saved) {
 	    // put it in the array that contains the timetables
 		// and load the details page
 		$.mobile.changePage('#timetable');
-		timetables.reset();
+		//timetables.reset();
     	for(i=0; i<json.length; ++i) {
     		// For every possible route
-    		var te = new TimeTable;
+    		var te = new TimeTable();
     		for(j=0; j<json[i].length; ++j){
     			// The route element's general data is here
     			var el = json[i][j];
-    			te.set("duration",el.duration/60+" min");
+    			te.set("duration",getDurationString(el.duration));
     			te.set("departure",el.legs[0].locs[0].depTime);
     			te.set("arrival",el.legs[el.legs.length-1].locs[el.legs[el.legs.length-1].locs.length-1].arrTime);
     			var buses = "";
@@ -209,10 +220,17 @@ function fetchTimetable(time, date, route, saved) {
     			for(k=0; k<el.legs.length; ++k){
     				// For every segment in the route
     				if(el.legs[k].type != "walk"){
-    					buses += el.legs[k].code+"/";
+    					buses += el.legs[k].code.split(" ")[0].substring(1).replace(/^0+/, '')+"/";
+    					details += el.legs[k].code.split(" ")[0].substring(1).replace(/^0+/, '') + ": ";
     				}
+    				else {
+						details += el.legs[k].type + ": ";
+					}
+					var temp = el.legs[k].locs[0].depTime.substring(8);
+					details += temp.substr(0,2)+":"+temp.substr(2,2) +" -> ";
+					temp = el.legs[k].locs[el.legs[k].locs.length-1].arrTime.substring(8);
+					details += temp.substr(0,2)+":"+temp.substr(2,2) + "\n";
     				// add to the details the start and end of the segment
-    				details +="";
     			}
     			te.set("buses", buses);
     			te.set("details", details);
