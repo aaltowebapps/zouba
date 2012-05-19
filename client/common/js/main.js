@@ -38,7 +38,7 @@ $(function() {
 	var RouteView = Backbone.View.extend ({
 		tagName: "li",
 		events: {
-			"click #fetch" : "loadDetails"
+			"click" : "loadDetails"
 		},
 		initialize: function() {
 			this.template = Templates.route;
