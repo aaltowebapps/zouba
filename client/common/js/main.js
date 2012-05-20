@@ -38,7 +38,8 @@ $(function() {
 	var RouteView = Backbone.View.extend ({
 		tagName: "li",
 		events: {
-			"click" : "loadDetails"
+			"click .fetch" : "loadDetails",
+			"click .remove" : "deleteRoute"
 		},
 		initialize: function() {
 			this.template = Templates.route;
@@ -53,6 +54,9 @@ $(function() {
 			// load the data from reittiopas
 			$.mobile.showPageLoadingMsg("a", "Loading", false);
 			fetchTimetable("","",this.model,true);
+		},
+		deleteRoute: function() {
+			this.model.destroy();
 		}
 	});
 	
@@ -205,7 +209,7 @@ function fetchTimetable(time, date, route, saved) {
     		$("#saveRouteButton").hide();
     	else
     		$("#saveRouteButton").show();
-    	$("#routeName").html(route.get("name"));
+    	//$("#routeName").html(route.get("name"));
 	    // put it in the array that contains the timetables
 		// and load the details page
 		$.mobile.changePage('#timetable');
