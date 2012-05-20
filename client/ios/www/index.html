@@ -30,16 +30,13 @@
     	</script>
     	<!-- Template for the route's element in the routes list page -->
     	<script id="route" type="text/x-handlebars-template">
-    		{{name}}
+    		<a href="#" class="fetch"><h1>{{name}}</h1></a>
+    		<a href="#" class="remove"></a>
     	</script>
     	<!-- Template for the route's details element in the routes details page -->
     	<script id="timetableelement" type="text/x-handlebars-template">
-
-    		<div data-role="collapsible" data-collapsed="true" id="timetableelement">
     			<h3>{{ departure }} - {{ buses }} - {{ arrival }} ({{ duration }})</h3>
-    			<ul>{{ details }}</ul>
-    		</div>
-
+    			{{{ details }}}
     	</script>
     	
     	<!-- Routes list page -->
@@ -51,10 +48,7 @@
 	        	<a href='#search' data-role="button">Search</a>
 	        	<h4>Saved routes:</h4>
 
-	        	<ul data-role='listview' id='routesList'>
-					<li id="fetch"></li>
-	        	</ul>
-	        	
+	        	<ul data-role="listview" data-split-icon="delete" id='routesList'></ul>
 	        	
 		  	</div>
 			<footer data-position="fixed" data-role="footer" data-tap-toggle="false">
@@ -68,7 +62,12 @@
 			</header>
 			<div data-role='content'>
 				<form action="javascript:SearchButtonPressed();" method="post">
+					<div id="use_gps-field-wrapper">
+						<label for="use_gps-cb">Current Location</label>
+						<input type="checkbox" id="use_gps-cb" name="use_gps" />
+					</div>
 					<input type="search" name="start" id="search_start" placeholder="Start address" value="" required/>
+					
 					<br>
 					<input type="search" name="destination" id="search_dest" placeholder="Destination address" value="" required/>
 					<br>
@@ -96,11 +95,8 @@
 		        <a href="#" data-icon="star" class="ui-btn-right" id="saveRouteButton">Save</a>
 			</header>
 			<div data-role='content'>
-				<ul data-role='listview' id="timetablelist"></ul>
-				<!-- <div data-role="collapsible-set" id="timetablelist">
-					<div data-role="collapsible" data-collapsed="true" id="timetableelement"></div>
-				</div> -->
-
+				<!--<ul data-role='listview' id="timetablelist"></ul>-->
+				<div data-role="collapsible-set" id="timetablelist"></div>
 		  	</div>
 			<footer data-position="fixed" data-role="footer">
 				<h6>&copy; Zouba - 2012 - Aalto University</h6>
