@@ -191,18 +191,23 @@ function getDurationString(str) {
 function fetchTimetable(time, date, route, saved) {
 	// Fetch the data
 	var baseUrl = "http://api.reittiopas.fi/hsl/prod/?";
+	
     var parameters = [
         "request=route",
         "user=zouba",
         "pass=caf9r3ee",
         "format=json",
-        "from="+route.get("start"),
         "to="+route.get("end")
     ];
     if(date != "")
     	parameters.push("date="+date);
     if(time != "") 
     	parameters.push("time="+time);
+	if(route.get("origin")=="gps"){
+		parameters.push("from="+getGPSLocation());
+	} else
+		parameters.push("from="+route.get("start"));
+	
     var url = baseUrl+parameters.join("&");
     $.getJSON(url, function(json) {
     	if(saved)
@@ -247,6 +252,10 @@ function fetchTimetable(time, date, route, saved) {
     	}
     	$.mobile.hidePageLoadingMsg();
     });
+}
+
+function getGPSLocation() {
+	
 }
 
 var tempRoute;
