@@ -11,6 +11,6 @@ function showPosition(position)
   var lat = position.coords.latitude;
   var lng = position.coords.longitude;
   
-  alert(lat + ', ' + lng);
+  $("#search_start").val(lat + ', ' + lng);
   
   }

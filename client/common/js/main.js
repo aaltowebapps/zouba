@@ -29,6 +29,14 @@ $(function() {
 		SaveRouteButtonPressed();
 	});
 	
+	// Link the checkbox in the search page
+	$("#use_gps-cb").click(function() {
+  		if($("#use_gps-cb")[0].checked)
+			$("#search_start").attr("disabled","disabled");
+		else
+			$("#search_start").removeAttr("disabled");
+	});
+	
 	// Load the handlebars templates
 	$('script[type="text/x-handlebars-template"]').each(function () {
 	    Templates[this.id] = Handlebars.compile($(this).html());
@@ -53,7 +61,10 @@ $(function() {
 			// When the element is clicked from the list
 			// load the data from reittiopas
 			$.mobile.showPageLoadingMsg("a", "Loading", false);
-			fetchTimetable("","",this.model,true);
+			if(this.model.get("origin")=="gps"){
+				fetchGPSLocationTimetable("","",this.model, true);
+			} else
+				fetchTimetable("","",this.model,true);
 		},
 		deleteRoute: function() {
 			this.model.destroy();
@@ -141,9 +152,15 @@ function SearchButtonPressed() {
 	var date = ""+year+month+day;
 	
 	$.mobile.showPageLoadingMsg("a", "Loading", false);
-	if($("#search_start").val() != "" && $("#search_dest").val() != "") {
+	if($("#use_gps-cb")[0].checked)
+		getGPSCoordinates(time, date);
+	else
 		getFromCoordinates(time, date);
-	}
+}
+
+function getGPSCoordinates(time, date) {
+	tempRoute = new Route({start: "", name: "", origin: "gps"});
+	getToCoordinates(time, date, tempRoute);
 }
 
 function getFromCoordinates(time, date) {
@@ -157,11 +174,12 @@ function getFromCoordinates(time, date) {
     ];
     var url = baseUrl+parameters.join("&");
     $.getJSON(url, function(json) {
-    	getToCoordinates(time, date, json[0].coords);
+    	tempRoute = new Route({start: json[0].coords, name: $("#search_start").val()+" "});
+    	getToCoordinates(time, date, tempRoute);
     });
 }
 
-function getToCoordinates(time, date, from) {
+function getToCoordinates(time, date, route) {
 	var baseUrl = "http://api.reittiopas.fi/hsl/prod/?";
     var parameters = [
         "request=geocode",
@@ -172,8 +190,13 @@ function getToCoordinates(time, date, from) {
     ];
     var url = baseUrl+parameters.join("&");
     $.getJSON(url, function(json) {
-    	tempRoute = new Route({name: $("#search_start").val()+" to "+$("#search_dest").val(), start: from, end: json[0].coords});
-    	fetchTimetable(time, date, tempRoute, false);
+    	route.set("end", json[0].coords);
+    	var tmp = route.get("name");
+    	route.set("name", tmp+"to "+$("#search_dest").val());
+    	if(route.get("origin")=="gps")
+    		fetchGPSLocationTimetable(time, date, route, false);
+    	else
+    		fetchTimetable(time, date, route, false);
     });
 }
 
@@ -188,6 +211,29 @@ function getDurationString(str) {
 	return res;
 }
 
+function fetchGPSLocationTimetable(time, date, route, saved) {
+	navigator.geolocation.getCurrentPosition(function(position) {
+		var lat = position.coords.latitude;
+  		var lng = position.coords.longitude;
+  		var baseUrl = "http://api.reittiopas.fi/hsl/prod/?";
+	
+	    var parameters = [
+	        "request=reverse_geocode",
+	        "user=zouba",
+	        "pass=caf9r3ee",
+	        "format=json",
+	        "epsg_in=wgs84",
+	       	"coordinate="+lng+","+lat
+	    ];
+	    
+	    var url = baseUrl+parameters.join("&");
+    	$.getJSON(url, function(json) {
+    		route.set("start",json[0].coords);
+    		fetchTimetable(time, date, route, saved);
+    	});
+	});
+}
+
 function fetchTimetable(time, date, route, saved) {
 	// Fetch the data
 	var baseUrl = "http://api.reittiopas.fi/hsl/prod/?";
@@ -197,16 +243,13 @@ function fetchTimetable(time, date, route, saved) {
         "user=zouba",
         "pass=caf9r3ee",
         "format=json",
+        "from="+route.get("start"),
         "to="+route.get("end")
     ];
     if(date != "")
     	parameters.push("date="+date);
     if(time != "") 
     	parameters.push("time="+time);
-	if(route.get("origin")=="gps"){
-		parameters.push("from="+getGPSLocation());
-	} else
-		parameters.push("from="+route.get("start"));
 	
     var url = baseUrl+parameters.join("&");
     $.getJSON(url, function(json) {
@@ -252,10 +295,6 @@ function fetchTimetable(time, date, route, saved) {
     	}
     	$.mobile.hidePageLoadingMsg();
     });
-}
-
-function getGPSLocation() {
-	
 }
 
 var tempRoute;
