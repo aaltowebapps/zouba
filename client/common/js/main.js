@@ -234,6 +234,13 @@ function fetchGPSLocationTimetable(time, date, route, saved) {
 	});
 }
 
+String.prototype.insert = function (index, string) {
+  if (index > 0)
+    return this.substring(0, index) + string + this.substring(index, this.length);
+  else
+    return string + this;
+};
+
 function fetchTimetable(time, date, route, saved) {
 	// Fetch the data
 	var baseUrl = "http://api.reittiopas.fi/hsl/prod/?";
@@ -269,25 +276,56 @@ function fetchTimetable(time, date, route, saved) {
     			// The route element's general data is here
     			var el = json[i][j];
     			te.set("duration",getDurationString(el.duration));
-    			te.set("departure",el.legs[0].locs[0].depTime);
-    			te.set("arrival",el.legs[el.legs.length-1].locs[el.legs[el.legs.length-1].locs.length-1].arrTime);
+    			te.set("departure",el.legs[0].locs[0].depTime.substring(8).insert(2, ':'));
+    			te.set("arrival",el.legs[el.legs.length-1].locs[el.legs[el.legs.length-1].locs.length-1].arrTime.substring(8).insert(2, ':'));
     			var buses = "";
     			var details = "";
     			for(k=0; k<el.legs.length; ++k){
     				// For every segment in the route
-    				if(el.legs[k].type != "walk"){
-    					buses += el.legs[k].code.split(" ")[0].substring(1).replace(/^0+/, '')+"/";
-    					details += el.legs[k].code.split(" ")[0].substring(1).replace(/^0+/, '') + ": ";
-    				}
-    				else {
-						details += el.legs[k].type + ": ";
-					}
-					var temp = el.legs[k].locs[0].depTime.substring(8);
+    				var temp = el.legs[k].locs[0].depTime.substring(8);
 					details += temp.substr(0,2)+":"+temp.substr(2,2) +" -> ";
 					temp = el.legs[k].locs[el.legs[k].locs.length-1].arrTime.substring(8);
-					details += temp.substr(0,2)+":"+temp.substr(2,2) + "\n";
+					details += temp.substr(0,2)+":"+temp.substr(2,2) + " ";
+					
+					var trans_nr = "";
+    				
+    				if(el.legs[k].type != "walk"){
+    					trans_nr = el.legs[k].code.split(" ")[0].substring(1).replace(/^0+/, '');
+    					switch (el.legs[k].type) {
+    						case '2':
+    							details += 'tram ';
+    							trans_nr = trans_nr.substr(-2, 2);
+    							break;
+    						case '6':
+    							details += 'metro ';
+    							trans_nr = '';
+    							break;
+    						case '7':
+    							details += 'ferry ';
+    							break;
+    						case '12':
+    							details += 'train ';
+    							trans_nr = trans_nr.substr(-1, 1);
+    							break;
+    						default:
+    							details += 'bus ';
+    							
+    					}
+    					buses += trans_nr +"/";
+    					details += trans_nr;
+    				}
+    				else {
+						details += el.legs[k].type;
+					}
+					//Check if destination name is not null and append
+					dest = el.legs[k].locs[el.legs[k].locs.length-1].name;
+					if (!dest)
+						dest = 'final destination'
+					details += " to "+ dest + '\n';
     				// add to the details the start and end of the segment
     			}
+    			//Truncate the last from buses
+    			buses = buses.replace(/\/*$/, '');
     			te.set("buses", buses);
     			te.set("details", details);
     		}
