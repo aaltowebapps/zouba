@@ -29,7 +29,8 @@
     	</script>
     	<!-- Template for the route's element in the routes list page -->
     	<script id="route" type="text/x-handlebars-template">
-    		{{name}}
+    		<a href="#" class="fetch"><h1>{{name}}</h1></a>
+    		<a href="#" class="remove"></a>
     	</script>
     	<!-- Template for the route's details element in the routes details page -->
     	<script id="timetableelement" type="text/x-handlebars-template">
@@ -46,10 +47,7 @@
 	        	<a href='#search' data-role="button">Search</a>
 	        	<h4>Saved routes:</h4>
 
-	        	<ul data-role='listview' id='routesList'>
-					<li id="fetch"></li>
-	        	</ul>
-	        	
+	        	<ul data-role="listview" data-split-icon="delete" id='routesList'></ul>
 	        	
 		  	</div>
 			<footer data-position="fixed" data-role="footer" data-tap-toggle="false">
@@ -93,7 +91,6 @@
 			<div data-role='content'>
 				<!--<ul data-role='listview' id="timetablelist"></ul>-->
 				<div data-role="collapsible-set" id="timetablelist"></div>
-
 		  	</div>
 			<footer data-position="fixed" data-role="footer">
 				<h6>&copy; Zouba - 2012 - Aalto University</h6>
