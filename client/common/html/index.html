@@ -67,10 +67,10 @@
 						<label for="use_gps-cb">Current Location</label>
 						<input type="checkbox" id="use_gps-cb" name="use_gps" />
 					</div>
-					<input type="search" name="start" id="search_start" placeholder="Start address" value="" required/>
+					<input type="search" name="start" id="search_start" placeholder="Start address" value="" title="Min length is 3" pattern=".{3,}" required/>
 					
 					<br>
-					<input type="search" name="destination" id="search_dest" placeholder="Destination address" value="" required/>
+					<input type="search" name="destination" id="search_dest" placeholder="Destination address" title="Min length is 3" pattern=".{3,}" value="" required/>
 					<br>
 					
 					<div style="margin-right: 0.5em;">
@@ -96,6 +96,7 @@
 		        <a href="#" data-icon="star" class="ui-btn-right" id="saveRouteButton">Save</a>
 			</header>
 			<div data-role='content'>
+				<h2 id="routeName"></h2>
 				<!--<ul data-role='listview' id="timetablelist"></ul>-->
 				<div data-role="collapsible-set" id="timetablelist"></div>
 		  	</div>

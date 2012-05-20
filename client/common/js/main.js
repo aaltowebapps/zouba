@@ -174,8 +174,13 @@ function getFromCoordinates(time, date) {
     ];
     var url = baseUrl+parameters.join("&");
     $.getJSON(url, function(json) {
-    	tempRoute = new Route({start: json[0].coords, name: $("#search_start").val()+" "});
-    	getToCoordinates(time, date, tempRoute);
+    	if(json == null) {
+    		$.mobile.hidePageLoadingMsg();
+    		alert($("#search_start").val()+" didn't produce any result");
+    	} else {
+	    	tempRoute = new Route({start: json[0].coords, name: $("#search_start").val()+" "});
+	    	getToCoordinates(time, date, tempRoute);
+    	}
     });
 }
 
@@ -190,13 +195,18 @@ function getToCoordinates(time, date, route) {
     ];
     var url = baseUrl+parameters.join("&");
     $.getJSON(url, function(json) {
-    	route.set("end", json[0].coords);
-    	var tmp = route.get("name");
-    	route.set("name", tmp+"to "+$("#search_dest").val());
-    	if(route.get("origin")=="gps")
-    		fetchGPSLocationTimetable(time, date, route, false);
-    	else
-    		fetchTimetable(time, date, route, false);
+    	if(json == null) {
+    		$.mobile.hidePageLoadingMsg();
+    		alert($("#search_dest").val()+" didn't produce any result");
+    	} else {
+	    	route.set("end", json[0].coords);
+	    	var tmp = route.get("name");
+	    	route.set("name", tmp+"to "+$("#search_dest").val());
+	    	if(route.get("origin")=="gps")
+	    		fetchGPSLocationTimetable(time, date, route, false);
+	    	else
+	    		fetchTimetable(time, date, route, false);
+    	}
     });
 }
 
@@ -264,7 +274,7 @@ function fetchTimetable(time, date, route, saved) {
     		$("#saveRouteButton").hide();
     	else
     		$("#saveRouteButton").show();
-    	//$("#routeName").html(route.get("name"));
+    	$("#routeName").html(route.get("name"));
 	    // put it in the array that contains the timetables
 		// and load the details page
 		$.mobile.changePage('#timetable');
