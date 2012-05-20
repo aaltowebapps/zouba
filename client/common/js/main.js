@@ -188,6 +188,13 @@ function getDurationString(str) {
 	return res;
 }
 
+String.prototype.insert = function (index, string) {
+  if (index > 0)
+    return this.substring(0, index) + string + this.substring(index, this.length);
+  else
+    return string + this;
+};
+
 function fetchTimetable(time, date, route, saved) {
 	// Fetch the data
 	var baseUrl = "http://api.reittiopas.fi/hsl/prod/?";
@@ -221,8 +228,8 @@ function fetchTimetable(time, date, route, saved) {
     			// The route element's general data is here
     			var el = json[i][j];
     			te.set("duration",getDurationString(el.duration));
-    			te.set("departure",el.legs[0].locs[0].depTime);
-    			te.set("arrival",el.legs[el.legs.length-1].locs[el.legs[el.legs.length-1].locs.length-1].arrTime);
+    			te.set("departure",el.legs[0].locs[0].depTime.substring(8).insert(2, ':'));
+    			te.set("arrival",el.legs[el.legs.length-1].locs[el.legs[el.legs.length-1].locs.length-1].arrTime.substring(8).insert(2, ':'));
     			var buses = "";
     			var details = "";
     			for(k=0; k<el.legs.length; ++k){
@@ -240,6 +247,8 @@ function fetchTimetable(time, date, route, saved) {
 					details += temp.substr(0,2)+":"+temp.substr(2,2) + "\n";
     				// add to the details the start and end of the segment
     			}
+    			//Truncate the last from buses
+    			buses = buses.replace(/\/*$/, '');
     			te.set("buses", buses);
     			te.set("details", details);
     		}
