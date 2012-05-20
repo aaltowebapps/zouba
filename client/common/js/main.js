@@ -51,6 +51,7 @@ $(function() {
 		loadDetails: function() {
 			// When the element is clicked from the list
 			// load the data from reittiopas
+			$.mobile.showPageLoadingMsg("a", "Loading", false);
 			fetchTimetable("","",this.model,true);
 		}
 	});
@@ -77,7 +78,7 @@ $(function() {
 	});
 	
 	var TimeTableView = Backbone.View.extend ({
-		tagName: "li",
+		tagName: "div",
 		events: {
 		},
 		initialize: function() {
@@ -86,6 +87,8 @@ $(function() {
 		},
 		render: function() {
 			$(this.el).html( this.template(this.model.toJSON()) );
+			$(this.el).attr("data-role","collapsible");
+			$(this.el).attr("data-collapsed","true");
 			return this;
 		}
 	});
@@ -104,7 +107,7 @@ $(function() {
 				var rv = new TimeTableView({model: item});
 				el.append(rv.render().el);
 			});
-			el.listview("refresh");
+			el.collapsibleset("refresh");
 			return this;
 		}
 	});
@@ -133,6 +136,7 @@ function SearchButtonPressed() {
 	var year = d.getFullYear();
 	var date = ""+year+month+day;
 	
+	$.mobile.showPageLoadingMsg("a", "Loading", false);
 	if($("#search_start").val() != "" && $("#search_dest").val() != "") {
 		getFromCoordinates(time, date);
 	}
@@ -237,6 +241,7 @@ function fetchTimetable(time, date, route, saved) {
     		}
     		timetables.add(te);
     	}
+    	$.mobile.hidePageLoadingMsg();
     });
 }
 
