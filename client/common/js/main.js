@@ -283,7 +283,7 @@ function fetchTimetable(time, date, route, saved) {
     			for(k=0; k<el.legs.length; ++k){
     				// For every segment in the route
     				var temp = el.legs[k].locs[0].depTime.substring(8);
-					details += temp.substr(0,2)+":"+temp.substr(2,2) +" -> ";
+					details += '<p>' + temp.substr(0,2)+":"+temp.substr(2,2) +" -> ";
 					temp = el.legs[k].locs[el.legs[k].locs.length-1].arrTime.substring(8);
 					details += temp.substr(0,2)+":"+temp.substr(2,2) + " ";
 					
@@ -321,7 +321,7 @@ function fetchTimetable(time, date, route, saved) {
 					dest = el.legs[k].locs[el.legs[k].locs.length-1].name;
 					if (!dest)
 						dest = 'final destination'
-					details += " to "+ dest + '\n';
+					details += " to "+ dest + '</p>\n';
     				// add to the details the start and end of the segment
     			}
     			//Truncate the last from buses
