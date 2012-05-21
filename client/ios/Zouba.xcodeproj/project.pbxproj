@@ -42,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F0B2150156A672B00EA0813 /* default.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = default.gpx; path = ../../default.gpx; sourceTree = "<group>"; };
 		EAD1C7B71551C1E6007E7CE0 /* Zouba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zouba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAD1C7BB1551C1E6007E7CE0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EAD1C7BD1551C1E6007E7CE0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -117,6 +118,7 @@
 		EAD1C7A91551C1E6007E7CE0 = {
 			isa = PBXGroup;
 			children = (
+				4F0B2150156A672B00EA0813 /* default.gpx */,
 				EAD1C8131551C2C5007E7CE0 /* www */,
 				EAD1C7D51551C1E6007E7CE0 /* Zouba */,
 				EAD1C7BA1551C1E6007E7CE0 /* Frameworks */,
