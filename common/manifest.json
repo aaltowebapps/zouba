@@ -1,0 +1,13 @@
+{
+  "name": "ZouBa",
+  "description":  "Quickly find your bus",
+  "version": "0.0.1",
+  "app": {
+    "launch": {
+      "local_path": "html/index.html"
+    }
+  },
+  "permissions": [
+      "http://api.reittiopas.fi/*"
+  ]
+}
